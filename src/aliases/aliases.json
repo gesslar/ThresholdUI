@@ -1,0 +1,16 @@
+[
+       {
+              "isActive": "yes",
+              "isFolder": "no",
+              "name": "Toggle Heal Tick Gauge",
+              "regex": "^regen (\\w+)$",
+              "script": ""
+       },
+       {
+              "isActive": "no",
+              "isFolder": "no",
+              "name": "Display Ping Table",
+              "regex": "^ping$",
+              "script": ""
+       }
+]
