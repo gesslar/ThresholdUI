@@ -49,6 +49,10 @@ function ThresholdUI:DeregisterEventHandlers()
             label = self.AppName .. "." .. event
         end
 
+        if subevent then
+            label = label .. "." .. subevent
+        end
+
         deleteNamedEventHandler(self.AppName, label)
     end
 end
