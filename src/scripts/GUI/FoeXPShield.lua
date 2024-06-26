@@ -1,3 +1,5 @@
+-- This module is responsible for displaying the foe, xp, and shielding bars.
+
 -- Foe, XP, etc
 ThresholdUI.OtherBox = ThresholdUI.OtherBox or Geyser.VBox:new({name = "OtherBox"}, ThresholdUI.BarBox)
 
