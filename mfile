@@ -2,7 +2,7 @@
        "package": "ThresholdUI",
        "title": "UI for ThresholdRPG",
        "description": "Threshold RPG UI",
-       "version": "3.5.3",
+       "version": "3.5.4",
        "author": "Gesslar",
        "icon": "griffon-right.jpg",
        "dependencies": "",
