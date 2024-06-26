@@ -19,10 +19,10 @@ function ThresholdUI:Uninstall(event, package)
     setBorderColor(0,0,0)
     setBgColor(0,0,0)
     setBackgroundColor(0,0,0)
-    self:DeregisterEventHandlers()
     self.MainContainer:hide()
     self:stopTime()
     deleteAllNamedTimers(self.AppName)
+    deleteAllNamedEventHandlers(self.AppName)
     ThresholdUI = {}
     cecho("\n<red>You have uninstalled ThresholdUI.\n")
 end
