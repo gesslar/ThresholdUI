@@ -1,9 +1,5 @@
 ThresholdUI.ConnectionTimer = nil
 ThresholdUI:LoadPrefs()
-ThresholdUI.ConnectionHandlers = {
-    {"sysConnectionEvent", f[[ThresholdUI:ConnectionScript()]]},
-    {"sysDisconnectionEvent", f[[ThresholdUI:DisconnectionScript()]]},
-}
 
 function ThresholdUI:ConnectionScript()
     self:RegisterEventHandlers()
@@ -23,6 +19,11 @@ function ThresholdUI:DisconnectionScript()
     raiseEvent("ThresholdUI.ResetPingHistory")
     ThresholdUI:DeregisterEventHandlers()
 end
+
+ThresholdUI.ConnectionHandlers = {
+    {"sysConnectionEvent", function() ThresholdUI:ConnectionScript() end},
+    {"sysDisconnectionEvent", function() ThresholdUI:DisconnectionScript() end},
+}
 
 function ThresholdUI.modifyModules()
     -- Enable Modules
