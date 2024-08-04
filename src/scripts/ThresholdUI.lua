@@ -5,7 +5,7 @@ ThresholdUI = ThresholdUI or {}
 ThresholdUI.AppName = ThresholdUI.AppName or "ThresholdUI"
 
 -- Threshold App Directory
-ThresholdUI.AppDir = f"{getMudletHomeDir()}/{ThresholdUI.appName}"
+ThresholdUI.AppDir = f"{getMudletHomeDir()}/{ThresholdUI.AppName}"
 
 -- Prefs
 ThresholdUI.PrefsFile = f"{ThresholdUI.AppDir}/prefs.lua"
@@ -31,22 +31,39 @@ ThresholdUI.Vitals = ThresholdUI.Vitals or {
 }
 
 ThresholdUI.metrics = {
-    height = 76,
+    height = 80,
     inactiveHeight = 20,
     gauge_label_font_size = 12,
-    gauge_font_size = 13
+    gauge_font_size = 13,
+    inactive_font_size = 11
 }
+
+local function round(num)
+    if num >= 0 then
+        return math.floor(num + 0.5)
+    else
+        return math.ceil(num - 0.5)
+    end
+end
+
 
 -- Bar updater
 function ThresholdUI:SetBarValue(bar, curr, max, text)
     local curr_value
+    local bar_value, bar_max
 
     if curr < 0 then curr_value = 0
     else curr_value = curr
     end
 
-    if text ~= nil then bar:setValue(curr_value, max, f"<center>{text}</center>")
-    else bar:setValue(curr_value, max, f"<center>{curr}/{max}</center>")
+    bar_value = round(curr_value * 100 / max)
+    bar_max = 100
+
+    if bar_value < 5 then
+        bar_value = 0
+    end
+    if text ~= nil then bar:setValue(bar_value, bar_max, f"{text}")
+    else bar:setValue(bar_value, bar_max, f"{curr}/{max}")
     end
 end
 

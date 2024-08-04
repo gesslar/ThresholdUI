@@ -1,1 +1,0 @@
-raiseEvent("ThresholdUI.Ping")

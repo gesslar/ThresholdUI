@@ -1,149 +1,111 @@
-ThresholdUI.RightBox = ThresholdUI.RightBox or
-    Geyser.HBox:new({
-        name = "RightBox",
-        width = 140,
-        h_policy = Geyser.Fixed
-    }, ThresholdUI.BarBox)
+ThresholdUI.RightBox = ThresholdUI.RightBox or Geyser.HBox:new({
+    name = "RightBox",
+    width = 141,
+    h_policy = Geyser.Fixed
+}, ThresholdUI.BarBox)
 
 -- Meters
-ThresholdUI.MetersBox = ThresholdUI.MetersBox or
-    Geyser.HBox:new({
-        name = "MetersBox",
-        width = 40,
-        h_policy = Geyser.Fixed
-    }, ThresholdUI.RightBox)
+ThresholdUI.MetersBox = ThresholdUI.MetersBox or Geyser.HBox:new({
+    name = "MetersBox",
+    width = 40,
+    h_policy = Geyser.Fixed
+}, ThresholdUI.RightBox)
 
 -- Capacity
-ThresholdUI.CapacityBox = ThresholdUI.CapacityBox or
-    Geyser.VBox:new({
-        name = "CapacityBox"
-    }, ThresholdUI.MetersBox);
+ThresholdUI.CapacityBox = ThresholdUI.CapacityBox or Geyser.VBox:new({
+    name = "CapacityBox"
+}, ThresholdUI.MetersBox);
 
-ThresholdUI.CapacityBar = ThresholdUI.CapacityBar or
-    Geyser.Gauge:new({
-        name = "CapacityBar",
-        orientation = "vertical"
-    }, ThresholdUI.CapacityBox)
+ThresholdUI.CapacityBar = ThresholdUI.CapacityBar or Geyser.Gauge:new({
+    name = "CapacityBar",
+    orientation = "vertical"
+}, ThresholdUI.CapacityBox)
+ThresholdUI.CapacityBar:setStyleSheet(
+    ThresholdUI.Styles.MeterFront,
+    ThresholdUI.Styles.MeterBack
+)
 
-ThresholdUI.CapacityBar:setStyleSheet([[ margin-left: 2px; ]])
-ThresholdUI.CapacityBar.front:setStyleSheet(ThresholdUI.Styles.CapacityFront)
-ThresholdUI.CapacityBar.back:setStyleSheet(ThresholdUI.Styles.CapacityBack)
-
-ThresholdUI.CapacityLabel = ThresholdUI.CapacityLabel or
-    Geyser.Label:new({
-        name = "CapacityLabel",
-        height = 15,
-        width = "100%",
-        v_policy = Geyser.Fixed,
-        message = "C"
-    }, ThresholdUI.CapacityBox)
-
-ThresholdUI.CapacityLabel:setStyleSheet(ThresholdUI.Styles.CapacityText)
-ThresholdUI.CapacityLabel:echo(nil, "nocolor", "bc")
-ThresholdUI.CapacityLabel:setFontSize(10)
-ThresholdUI.CapacityLabel:setBold(1)
+ThresholdUI.CapacityLabel = ThresholdUI.CapacityLabel or Geyser.Label:new({
+    name = "CapacityLabel",
+    height = 15,
+    width = "100%",
+    v_policy = Geyser.Fixed,
+    message = "C"
+}, ThresholdUI.CapacityBox)
+ThresholdUI.CapacityLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
+ThresholdUI.CapacityLabel:echo(nil, "nocolor", nil)
 
 -- Tummy
-ThresholdUI.TummyBox = ThresholdUI.TummyBox or
-    Geyser.VBox:new({
-        name = "TummyBox"
-    }, ThresholdUI.MetersBox);
+ThresholdUI.TummyBox = ThresholdUI.TummyBox or Geyser.VBox:new({
+    name = "TummyBox"
+}, ThresholdUI.MetersBox);
 
-ThresholdUI.TummyBar = ThresholdUI.TummyBar or
-    Geyser.Gauge:new({
-        name = "TummyBar",
-        orientation = "vertical"
-    }, ThresholdUI.TummyBox)
+ThresholdUI.TummyBar = ThresholdUI.TummyBar or Geyser.Gauge:new({
+    name = "TummyBar",
+    orientation = "vertical"
+}, ThresholdUI.TummyBox)
+ThresholdUI.TummyBar:setStyleSheet(
+    ThresholdUI.Styles.MeterFront,
+    ThresholdUI.Styles.MeterBack
+)
 
-ThresholdUI.TummyBar:setStyleSheet([[ margin-left: 2px; ]])
-ThresholdUI.TummyBar.front:setStyleSheet(ThresholdUI.Styles.TummyFront)
-ThresholdUI.TummyBar.back:setStyleSheet(ThresholdUI.Styles.TummyBack)
-
-ThresholdUI.TummyLabel = ThresholdUI.TummyLabel or
-    Geyser.Label:new({
-        name = "TummyLabel",
-        height = 15,
-        width = "100%",
-        v_policy = Geyser.Fixed,
-        message = "T"
-    }, ThresholdUI.TummyBox)
-
-ThresholdUI.TummyLabel:setStyleSheet(ThresholdUI.Styles.TummyText)
-ThresholdUI.TummyLabel:echo(nil, "nocolor", "bc")
-ThresholdUI.TummyLabel:setFontSize(10)
-ThresholdUI.TummyLabel:setBold(1)
+ThresholdUI.TummyLabel = ThresholdUI.TummyLabel or Geyser.Label:new({
+    name = "TummyLabel",
+    height = 15,
+    width = "100%",
+    v_policy = Geyser.Fixed,
+    message = "T"
+}, ThresholdUI.TummyBox)
+ThresholdUI.TummyLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
+ThresholdUI.TummyLabel:echo(nil, "nocolor", nil)
 
 -- HealBank
-ThresholdUI.HealBankBox = ThresholdUI.HealBankBox or
-    Geyser.VBox:new({name = "HealBankBox"}, ThresholdUI.MetersBox);
-ThresholdUI.HealBankBar = ThresholdUI.HealBankBar or
-    Geyser.Gauge:new({name = "HealBankBar", orientation = "vertical"}, ThresholdUI.HealBankBox)
-ThresholdUI.HealBankBar:setStyleSheet([[ margin-left: 2px; ]])
-ThresholdUI.HealBankBar.front:setStyleSheet(ThresholdUI.Styles.HealBankFront)
-ThresholdUI.HealBankBar.back:setStyleSheet(ThresholdUI.Styles.HealBankBack)
-ThresholdUI.HealBankLabel = ThresholdUI.HealBankLabel or
-    Geyser.Label:new({
-        name = "HealBankLabel",
-        height = 15,
-        width = "100%",
-        v_policy = Geyser.Fixed,
-        message = "H"
-    },ThresholdUI.HealBankBox)
+ThresholdUI.HealBankBox = ThresholdUI.HealBankBox or Geyser.VBox:new({
+    name = "HealBankBox"
+}, ThresholdUI.MetersBox);
 
-ThresholdUI.HealBankLabel:setStyleSheet(ThresholdUI.Styles.HealBankText)
-ThresholdUI.HealBankLabel:echo(nil, "nocolor", "bc")
-ThresholdUI.HealBankLabel:setFontSize(10)
-ThresholdUI.HealBankLabel:setBold(1)
+ThresholdUI.HealBankBar = ThresholdUI.HealBankBar or Geyser.Gauge:new({
+        name = "HealBankBar",
+        orientation = "vertical"
+    }, ThresholdUI.HealBankBox)
+ThresholdUI.HealBankBar:setStyleSheet(
+    ThresholdUI.Styles.MeterFront,
+    ThresholdUI.Styles.MeterBack
+
+)
+
+ThresholdUI.HealBankLabel = ThresholdUI.HealBankLabel or Geyser.Label:new({
+    name = "HealBankLabel",
+    height = 15,
+    width = "100%",
+    v_policy = Geyser.Fixed,
+    message = "H"
+},ThresholdUI.HealBankBox)
+ThresholdUI.HealBankLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
+ThresholdUI.HealBankLabel:echo(nil, "nocolor", nil)
 
 -- HealTick
 ThresholdUI.HealTickBox = ThresholdUI.HealTickBox or
     Geyser.VBox:new({name = "HealTickBox"}, ThresholdUI.MetersBox);
 
-ThresholdUI.HealTickBar = ThresholdUI.HealTickBar or
-    Geyser.Gauge:new({name = "HealTickBar", orientation = "vertical"}, ThresholdUI.HealTickBox)
+ThresholdUI.HealTickBar = ThresholdUI.HealTickBar or Geyser.Gauge:new({
+    name = "HealTickBar",
+    orientation = "vertical"
+}, ThresholdUI.HealTickBox)
+ThresholdUI.HealTickBar:setStyleSheet(
+    ThresholdUI.Styles.MeterFront,
+    ThresholdUI.Styles.MeterBack
+)
 
-ThresholdUI.HealTickBar:setStyleSheet([[ margin-left: 2px; ]])
-ThresholdUI.HealTickBar.front:setStyleSheet(ThresholdUI.Styles.HealTickFront)
-ThresholdUI.HealTickBar.back:setStyleSheet(ThresholdUI.Styles.HealTickBack)
-
-ThresholdUI.HealTickLabel = ThresholdUI.HealTickLabel or
-    Geyser.Label:new({
-        name = "HealTickLabel",
-        height = 15,
-        width = "100%",
-        v_policy = Geyser.Fixed,
-        message = "R"
-    }, ThresholdUI.HealTickBox)
-
-ThresholdUI.HealTickLabel:setStyleSheet(ThresholdUI.Styles.HealTickText)
-ThresholdUI.HealTickLabel:echo(nil, "nocolor", "bc")
-ThresholdUI.HealTickLabel:setFontSize(10)
-ThresholdUI.HealTickLabel:setBold(1)
-
--- Breath bar
--- ThresholdUI.BreathBox = ThresholdUI.BreathBox or Geyser.VBox:new({
--- name = "BreathBox",
--- }, ThresholdUI.MetersBox);
---
--- ThresholdUI.BreathBar = ThresholdUI.BreathBar or Geyser.Gauge:new({
--- name="BreathBar",
--- orientation = "vertical"
--- }, ThresholdUI.BreathBox)
--- ThresholdUI.BreathBar:setStyleSheet([[ margin-left: 2px; ]])
--- ThresholdUI.BreathBar.front:setStyleSheet(ThresholdUI.Styles.BreathFront)
--- ThresholdUI.BreathBar.back:setStyleSheet(ThresholdUI.Styles.BreathBack)
---
--- ThresholdUI.BreathLabel = ThresholdUI.BreathLabel or Geyser.Label:new({
--- name = "BreathLabel",
--- height = 15,
--- width  = "100%",
--- v_policy = Geyser.Fixed,
--- message = "B"
--- }, ThresholdUI.BreathBox)
--- ThresholdUI.BreathLabel:setStyleSheet(ThresholdUI.Styles.BreathText)
--- ThresholdUI.BreathLabel:echo(nil, "nocolor", "bc")
--- ThresholdUI.BreathLabel:setFontSize(10)
--- ThresholdUI.BreathLabel:setBold(1)
+ThresholdUI.HealTickLabel = ThresholdUI.HealTickLabel or Geyser.Label:new({
+    name = "HealTickLabel",
+    height = 15,
+    width = "100%",
+    v_policy = Geyser.Fixed,
+    message = "R"
+}, ThresholdUI.HealTickBox)
+ThresholdUI.HealTickLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
+ThresholdUI.HealTickLabel:echo(nil, "nocolor", nil)
 
 function ThresholdUI:UpdateCapacity()
     if gmcp.Char.Status.capacity == nil then return end
@@ -198,41 +160,77 @@ function ThresholdUI:ToggleHealTick(event, arg, silent)
     end
 end
 
--- function ThresholdUI:UpdateBreath()
--- if gmcp.Char.Status.breath == nil then return end
--- self.BreathBar:setValue(tonumber(gmcp.Char.Status.breath), 100)
--- end
-
 -- Clock
-ThresholdUI.DateTimeBox = ThresholdUI.DateTimeBox or
-    Geyser.VBox:new({
-        name = "TimeBox",
-        width = 100, height = ThresholdUI.metrics.height, h_policy = Geyser.Fixed
-    }, ThresholdUI.RightBox)
 
-ThresholdUI.DateLabel = ThresholdUI.DateLabel or
-    Geyser.Label:new({
-        name = "DateLabel",
-        font = "Bitstream Vera Sans Mono", fontSize = 11, message = "This is Date"
-    }, ThresholdUI.DateTimeBox)
+-- Background label to prevent bleeding colours
+local DateTimeBgWidth = 100 -- Required in order to get the resizing to work
+ThresholdUI.DateTimeBg = ThresholdUI.DateTimeBg or Geyser.Label:new({
+    name = "DateTimeBg",
+    width = DateTimeBgWidth, height = ThresholdUI.metrics.height,
+    stylesheet = ThresholdUI.Styles.DateTimeLabel
+}, ThresholdUI.RightBox)
 
-ThresholdUI.DateLabel:setStyleSheet(ThresholdUI.Styles.DateTimeLabel)
+ThresholdUI.DateTimeBox = ThresholdUI.DateTimeBox or Geyser.VBox:new({
+    name = "TimeBox",
+    x = 0, y = 0,
+    width = "100%", height = "100%"
+}, ThresholdUI.DateTimeBg)
 
-ThresholdUI.DayLabel = ThresholdUI.DayLabel or
-    Geyser.Label:new({
-        name = "DayLabel",
-        font = "Bitstream Vera Sans Mono", fontSize = 11, message = "This is Time"
-    }, ThresholdUI.DateTimeBox)
+ThresholdUI.DateLabel = ThresholdUI.DateLabel or Geyser.Label:new({
+    name = "DateLabel",
+    font = ThresholdUI.Styles.DateTimeFont, fontSize = 12,
+    stylesheet = ThresholdUI.Styles.DateTimeLabel
+}, ThresholdUI.DateTimeBox)
 
-ThresholdUI.DayLabel:setStyleSheet(ThresholdUI.Styles.DateTimeLabel)
+ThresholdUI.DayLabel = ThresholdUI.DayLabel or Geyser.Label:new({
+    name = "DayLabel",
+    font = ThresholdUI.Styles.DateTimeFont, fontSize = 11,
+    stylesheet = ThresholdUI.Styles.DateTimeLabel
+}, ThresholdUI.DateTimeBox)
 
-ThresholdUI.TimeLabel = ThresholdUI.TimeLabel or
-    Geyser.Label:new({
-        name = "TimeLabel",
-        font = "Bitstream Vera Sans Mono", fontSize = 11, message = "This is Time"
-    }, ThresholdUI.DateTimeBox)
+ThresholdUI.TimeLabel = ThresholdUI.TimeLabel or Geyser.Label:new({
+    name = "TimeLabel",
+    font = ThresholdUI.Styles.DateTimeFont, fontSize = 11,
+    stylesheet = ThresholdUI.Styles.DateTimeLabel
+}, ThresholdUI.DateTimeBox)
 
-ThresholdUI.TimeLabel:setStyleSheet(ThresholdUI.Styles.DateTimeLabel)
+ThresholdUI.Devotion = ThresholdUI.Devotion or Geyser.Label:new({
+    name = "DevotionLabel",
+    font = ThresholdUI.Styles.DateTimeFont, fontSize = 10,
+    stylesheet = ThresholdUI.Styles.DateTimeLabel
+}, ThresholdUI.DateTimeBox)
+
+function ThresholdUI:ToggleTimeBox(event, arg, silent)
+    if arg == "on" then
+        self.DateTimeBg:resize(DateTimeBgWidth, nil)
+        self.DateTimeBg:show()
+        self.RightBox:add(self.DateTimeBg)
+        self.RightBox:resize(self.MetersBox.get_width() + DateTimeBgWidth, nil)
+        self.RightBox:move(-(self.MetersBox.get_width() + DateTimeBgWidth), nil)
+        self.BarBox:organize()
+        self:startTime()
+        if silent ~= true then
+            echo("Time box enabled.\n")
+        end
+        self.Prefs.TimeBox = true
+        self:SavePrefs()
+    elseif arg == "off" then
+        self.DateTimeBg:hide()
+        self.RightBox:remove(self.DateTimeBg)
+        self.RightBox:organize()
+        self.RightBox:resize(self.MetersBox.get_width(), nil)
+        self.RightBox:move(-self.MetersBox.get_width(), nil)
+        self.BarBox:organize()
+        self:stopTime()
+        self.Prefs.TimeBox = false
+        self:SavePrefs()
+        if silent ~= true then
+            echo("Time box disabled.\n")
+        end
+    else
+        echo("Syntax: timebox <on|off>\n")
+    end
+end
 
 function ThresholdUI:refreshTime()
     local datetime = ThreshTime:getTime()
@@ -257,18 +255,19 @@ function ThresholdUI:refreshTime()
     elseif datetime.hour == 23 then
         suffix = "rd"
     end
-    timemess = f"{timeAsString}{suffix} Toll"
-    self.DateLabel:echo(datemess, "nocolor", "c")
-    self.DayLabel:echo(datetime.weekday, "nocolor", "c")
-    self.TimeLabel:echo(timemess, "nocolor", "c")
+    timemess = f"{timeAsString}{suffix} toll"
+    self.DateLabel:echo(datemess, "nocolor", nil)
+    self.DayLabel:echo(datetime.weekday, "nocolor", nil)
+    self.TimeLabel:echo(timemess, "nocolor", nil)
+    self.Devotion:echo(datetime.devotion, "nocolor", nil)
 end
 
 function ThresholdUI:startTime()
-    registerNamedTimer(self.AppName, self.AppName .. ".Time", 1, function() self:refreshTime() end, true)
+    registerNamedTimer(self.AppName, self.Timers.Time, 1, function() self:refreshTime() end, true)
 end
 
 function ThresholdUI:stopTime()
-    deleteNamedTimer(self.AppName, self.AppName .. "Time")
+    deleteNamedTimer(self.AppName, self.Timers.Time)
 end
 
 ThresholdUI:startTime()
