@@ -7,10 +7,10 @@
               "script": ""
        },
        {
-              "isActive": "no",
+              "isActive": "yes",
               "isFolder": "no",
-              "name": "Display Ping Table",
-              "regex": "^ping$",
+              "name": "Toggle Date Time Box",
+              "regex": "^datetime (\\w+)$",
               "script": ""
        }
 ]

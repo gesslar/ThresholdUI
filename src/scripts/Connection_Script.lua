@@ -3,20 +3,20 @@ ThresholdUI:LoadPrefs()
 
 function ThresholdUI:ConnectionScript()
     self:RegisterEventHandlers()
-    raiseEvent("ThresholdUI.EnablePing")
-    registerNamedTimer(self.AppName, self.AppName .. ".Connection", 1, function()
-        deleteNamedTimer(self.AppName, self.AppName .. ".Connection")
+    registerNamedTimer(self.AppName, self.Timers.Connection, 1, function()
+        deleteNamedTimer(self.AppName, self.Timers.Connection)
         self:modifyModules()
         if ThresholdUI.Prefs.HealTick == false then
             raiseEvent("ThresholdUI.ToggleHealTick", "off", true)
         end
-        deleteNamedTimer(self.AppName, self.AppName .. ".Connection")
+        if ThresholdUI.Prefs.TimeBox == false then
+            raiseEvent("ThresholdUI.ToggleTimeBox", "off", true)
+        end
+        deleteNamedTimer(self.AppName, self.Timers.Connection)
     end)
 end
 
 function ThresholdUI:DisconnectionScript()
-    raiseEvent("ThresholdUI.DisablePing")
-    raiseEvent("ThresholdUI.ResetPingHistory")
     ThresholdUI:DeregisterEventHandlers()
 end
 

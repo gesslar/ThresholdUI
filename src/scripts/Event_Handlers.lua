@@ -11,16 +11,11 @@ ThresholdUI.EventHandlers = ThresholdUI.EventHandlers or {
     {"gmcp.Char.Status", "HealTick", f[[ThresholdUI:UpdateHealTick]]},
     {"gmcp.Char.Status", "Inactive", f[[ThresholdUI:DoInactiveTimer]]},
     {"ThresholdUI.ToggleHealTick", nil, f[[ThresholdUI:ToggleHealTick]]},
+    {"ThresholdUI.ToggleTimeBox", nil, f[[ThresholdUI:ToggleTimeBox]]},
     {"gmcp.Char.Feedback", nil, f[[ThresholdUI:UpdateFeedback]]},
     {"ThresholdUI.FeedbackToggle", nil, f[[ThresholdUI:FeedbackToggle]]},
     {"gmcp.Char.Feedback", nil, f[[ThresholdUI:UpdateFeedback]]},
     {"ThresholdUI.FeedbackToggle", nil, f[[ThresholdUI:FeedbackToggle]]},
-    -- {"gmcp.Core.Ping", nil, function() ThresholdUI:ReceivePing() end},
-    -- {"ThresholdUI.Ping", nil, function() ThresholdUI:DisplayPing() end},
-    -- {"ThresholdUI.EnablePing", nil, function() ThresholdUI:EnablePing() end},
-    -- {"ThresholdUI.DisablePing", nil, function() ThresholdUI:DisablePing() end},
-    -- {"ThresholdUI.ResetPingHistory", nil, function() ThresholdUI:ResetPingHistory() end},
-    -- {"gmcp.Char.Status", "Breath", function() ThresholdUI:UpdateBreath() end},
 }
 
 function ThresholdUI:RegisterEventHandlers()

@@ -24,7 +24,6 @@ function ThresholdUI:Uninstall(event, package)
     setBackgroundColor(0,0,0)
     self.MainContainer:hide()
     self.FeedbackBox:hide()
-    self:stopTime()
     deleteAllNamedTimers(self.AppName)
     deleteAllNamedEventHandlers(self.AppName)
     ThresholdUI = {}

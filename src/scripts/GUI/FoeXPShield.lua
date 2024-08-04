@@ -1,114 +1,109 @@
 -- This module is responsible for displaying the foe, xp, and shielding bars.
 
 -- Foe, XP, etc
-ThresholdUI.OtherBox = ThresholdUI.OtherBox or Geyser.VBox:new({name = "OtherBox"}, ThresholdUI.BarBox)
+ThresholdUI.OtherBox = ThresholdUI.OtherBox or Geyser.VBox:new({
+    name = "OtherBox"
+}, ThresholdUI.BarBox)
 
 -- Foe
-ThresholdUI.FoeContainer = ThresholdUI.FoeContainer or
-    Geyser.Container:new({
-        name = "FoeContainer",
-        x = 0, y = 0, height = "100%", width = "100%"
-    }, ThresholdUI.OtherBox);
+ThresholdUI.FoeContainer = ThresholdUI.FoeContainer or Geyser.Container:new({
+    name = "FoeContainer",
+    x = 0, y = 0, height = "100%", width = "100%"
+}, ThresholdUI.OtherBox);
 
-ThresholdUI.FoeBar = ThresholdUI.FoeBar or
-    Geyser.Gauge:new({
-        name = "FoeBar",
-        x = 0, y = 0, width = "100%", height = "100%"
-    }, ThresholdUI.FoeContainer)
+ThresholdUI.FoeBar = ThresholdUI.FoeBar or Geyser.Gauge:new({
+    name = "FoeBar",
+    x = 0, y = 0, width = "100%", height = "100%"
+}, ThresholdUI.FoeContainer)
+ThresholdUI.FoeBar:setStyleSheet(
+    ThresholdUI.Styles.FoeFrontNormal,
+    ThresholdUI.Styles.FoeBack,
+    ThresholdUI.Styles.GaugeText
+)
+ThresholdUI.FoeBar.text:setFontSize(ThresholdUI.metrics.gauge_font_size)
+ThresholdUI.FoeBar.text:echo(nil, "nocolor", nil)
 
-ThresholdUI.FoeBar.front:setStyleSheet(ThresholdUI.Styles.FoeFrontNormal)
-ThresholdUI.FoeBar.back:setStyleSheet(ThresholdUI.Styles.FoeBack)
-ThresholdUI.FoeBar.text:setStyleSheet(ThresholdUI.Styles.GaugeText)
-ThresholdUI.FoeBar.text:setFontSize(11)
-ThresholdUI.FoeBar.text:echo(nil, "nocolor", "bc")
-ThresholdUI.FoeBar.text:setAlignment("right")
-
-ThresholdUI.FoeLabel = ThresholdUI.FoeLabel or
-    Geyser.Label:new({
-        name = "FoeLabel",
-        x = 0, y = 0, width = "100%", height = "100%", message = "Foe"
-    }, ThresholdUI.FoeContainer)
-
-ThresholdUI.FoeLabel:setStyleSheet(ThresholdUI.Styles.InnerLabelStyle)
+ThresholdUI.FoeLabel = ThresholdUI.FoeLabel or Geyser.Label:new({
+    name = "FoeLabel",
+    x = 0, y = 0, width = "100%", height = "100%", message = "Foe"
+}, ThresholdUI.FoeContainer)
+ThresholdUI.FoeLabel:setStyleSheet(ThresholdUI.Styles.GaugeLabel)
 ThresholdUI.FoeLabel:setFontSize(ThresholdUI.metrics.gauge_label_font_size)
+ThresholdUI.FoeLabel:echo(nil, "nocolor", nil)
 
-ThresholdUI.FoeFoeLabel = ThresholdUI.FoeFoeLabel or
-    Geyser.Label:new({
-        name = "FoeFoeLabel",
-        x = 0, y = 0, width = "100%", height = "100%", message = "Foe name"
-    }, ThresholdUI.FoeContainer)
-
+ThresholdUI.FoeFoeLabel = ThresholdUI.FoeFoeLabel or Geyser.Label:new({
+    name = "FoeFoeLabel",
+    x = 0, y = 0, width = "100%", height = "100%",
+}, ThresholdUI.FoeContainer)
 ThresholdUI.FoeFoeLabel:setStyleSheet(ThresholdUI.Styles.FoeFoeLabelStyle)
 ThresholdUI.FoeFoeLabel:setFontSize(ThresholdUI.metrics.gauge_label_font_size)
-ThresholdUI.FoeFoeLabel:hide()
+ThresholdUI.FoeFoeLabel:echo(nil, "nocolor", nil)
 
 -- XP
-ThresholdUI.XPContainer = ThresholdUI.XPContainer or
-    Geyser.Container:new({
-        name = "XPContainer",
-        x = 0, y = 0, height = "100%", width = "100%"
-    }, ThresholdUI.OtherBox);
+ThresholdUI.XPContainer = ThresholdUI.XPContainer or Geyser.Container:new({
+    name = "XPContainer",
+    x = 0, y = 0, height = "100%", width = "100%"
+}, ThresholdUI.OtherBox);
 
-ThresholdUI.XPBar = ThresholdUI.XPBar or
-    Geyser.Gauge:new({
-        name = "XPBar",
-        x = 0, y = 0, width = "100%", height = "100%"
-    }, ThresholdUI.XPContainer)
-
-ThresholdUI.XPBar.front:setStyleSheet(ThresholdUI.Styles.XPFrontNormal)
-ThresholdUI.XPBar.back:setStyleSheet(ThresholdUI.Styles.XPBack)
-ThresholdUI.XPBar.text:setStyleSheet(ThresholdUI.Styles.GaugeText)
+ThresholdUI.XPBar = ThresholdUI.XPBar or Geyser.Gauge:new({
+    name = "XPBar",
+    x = 0, y = 0, width = "100%", height = "100%"
+}, ThresholdUI.XPContainer)
+ThresholdUI.XPBar:setStyleSheet(
+    ThresholdUI.Styles.XPFrontNormal,
+    ThresholdUI.Styles.XPBack,
+    ThresholdUI.Styles.GaugeText
+)
 ThresholdUI.XPBar.text:setFontSize(ThresholdUI.metrics.gauge_font_size)
-ThresholdUI.XPBar.text:echo(nil, "nocolor", "bc")
+ThresholdUI.XPBar.text:echo(nil, "nocolor", nil)
 
-ThresholdUI.XPLabel = ThresholdUI.XPLabel or
-    Geyser.Label:new({
-        name = "XPLabel",
-        x = 0, y = 0, width = "100%", height = "100%", message = "XP"
-    },ThresholdUI.XPContainer)
-
-ThresholdUI.XPLabel:setStyleSheet(ThresholdUI.Styles.InnerLabelStyle)
+ThresholdUI.XPLabel = ThresholdUI.XPLabel or Geyser.Label:new({
+    name = "XPLabel",
+    x = 0, y = 0, width = "100%", height = "100%", message = "XP"
+},ThresholdUI.XPContainer)
+ThresholdUI.XPLabel:setStyleSheet(ThresholdUI.Styles.GaugeLabel)
 ThresholdUI.XPLabel:setFontSize(ThresholdUI.metrics.gauge_label_font_size)
+ThresholdUI.XPLabel:echo(nil, "nocolor", nil)
 
 -- Shielding
-ThresholdUI.ShieldContainer = ThresholdUI.ShieldContainer or
-    Geyser.Container:new({
-        name = "ShieldContainer",
-        x = 0, y = 0, height = "100%", width = "100%"
-    }, ThresholdUI.OtherBox);
+ThresholdUI.ShieldContainer = ThresholdUI.ShieldContainer or Geyser.Container:new({
+    name = "ShieldContainer",
+    x = 0, y = 0, height = "100%", width = "100%"
+}, ThresholdUI.OtherBox);
 
-ThresholdUI.ShieldBar = ThresholdUI.ShieldBar or
-    Geyser.Gauge:new({
-        name = "ShieldBar",
-        x = 0, y = 0, width = "100%", height = "100%"
-    }, ThresholdUI.ShieldContainer)
-
-ThresholdUI.ShieldBar.front:setStyleSheet(ThresholdUI.Styles.ShieldFrontNormal)
-ThresholdUI.ShieldBar.back:setStyleSheet(ThresholdUI.Styles.ShieldBack)
-ThresholdUI.ShieldBar.text:setStyleSheet(ThresholdUI.Styles.GaugeText)
+ThresholdUI.ShieldBar = ThresholdUI.ShieldBar or Geyser.Gauge:new({
+    name = "ShieldBar",
+    x = 0, y = 0, width = "100%", height = "100%"
+}, ThresholdUI.ShieldContainer)
+ThresholdUI.ShieldBar:setStyleSheet(
+    ThresholdUI.Styles.ShieldFrontNormal,
+    ThresholdUI.Styles.ShieldBack,
+    ThresholdUI.Styles.GaugeText
+)
 ThresholdUI.ShieldBar.text:setFontSize(ThresholdUI.metrics.gauge_font_size)
-ThresholdUI.ShieldBar.text:echo(nil, "nocolor", "bc")
+ThresholdUI.ShieldBar.text:echo(nil, "nocolor", nil)
 
-ThresholdUI.ShieldLabel = ThresholdUI.ShieldLabel or
-    Geyser.Label:new({
-        name = "ShieldLabel",
-        x = 0, y = 0, width = "100%", height = "100%", message = "Shield"
-    }, ThresholdUI.ShieldContainer)
+ThresholdUI.ShieldLabel = ThresholdUI.ShieldLabel or Geyser.Label:new({
+    name = "ShieldLabel",
+    x = 0, y = 0, width = "100%", height = "100%",
+    message = "Shielding"
+}, ThresholdUI.ShieldContainer)
 
-ThresholdUI.ShieldLabel:setStyleSheet(ThresholdUI.Styles.InnerLabelStyle)
+ThresholdUI.ShieldLabel:setStyleSheet(ThresholdUI.Styles.GaugeLabel)
 ThresholdUI.ShieldLabel:setFontSize(ThresholdUI.metrics.gauge_label_font_size)
+ThresholdUI.ShieldLabel:echo(nil, "nocolor", nil)
 ThresholdUI.ShieldContainer:hide()
 
 function ThresholdUI:UpdateXP()
     if gmcp.Char.Status.tnl == nil then return end
 
     self.XPBar:setValue(
-        tonumber(gmcp.Char.Status.tnl), 100, f("<center>{gmcp.Char.Status.tnl}%</center>")
+        tonumber(gmcp.Char.Status.tnl), 100, f("{gmcp.Char.Status.tnl}%")
     )
 end
 
 function ThresholdUI:UpdateShielding()
-    if gmcp.Char.Status.Shielding == nil then return end
+    if gmcp.Char.Shielding == nil then return end
 
     local shielding = tonumber(gmcp.Char.Shielding)
     if not shielding or shielding < 0 then
@@ -116,7 +111,7 @@ function ThresholdUI:UpdateShielding()
     else
         self.ShieldContainer:show()
     end
-    self.ShieldBar:setValue(shielding, 100, f("<center>{shielding}%</center>"))
+    self.ShieldBar:setValue(shielding, 100, f("{shielding}%"))
 end
 
 function ThresholdUI:UpdateFoe()
@@ -132,8 +127,10 @@ function ThresholdUI:UpdateFoe()
     local foetext = ""
     if foe ~= "none" then
         self.FoeLabel:echo(foe)
+        self.FoeLabel:setStyleSheet(self.Styles.GaugeLabelCombat)
     else
         self.FoeLabel:echo("Foe")
+        self.FoeLabel:setStyleSheet(self.Styles.GaugeLabel)
     end
 
     self.FoeFoeLabel:echo(foefoe)
@@ -143,5 +140,6 @@ function ThresholdUI:UpdateFoe()
         self.FoeFoeLabel:show()
     end
 
-    self.FoeBar:setValue(health, 100, foetext)
+    self:SetBarValue(self.FoeBar, health, 100, foetext)
+    -- self.FoeBar:setValue(50, 100, foetext)
 end

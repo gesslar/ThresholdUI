@@ -20,6 +20,12 @@
        {
               "isActive": "yes",
               "isFolder": "no",
+              "name": "Timers",
+              "script": ""
+       },
+       {
+              "isActive": "yes",
+              "isFolder": "no",
               "name": "Connection Script",
               "script": ""
        },
@@ -33,12 +39,6 @@
               "isActive": "yes",
               "isFolder": "no",
               "name": "ThreshTime",
-              "script": ""
-       },
-       {
-              "isActive": "yes",
-              "isFolder": "no",
-              "name": "Ping",
               "script": ""
        },
        {
