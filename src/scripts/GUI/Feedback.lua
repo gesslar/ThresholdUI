@@ -24,9 +24,9 @@ ThresholdUI.FeedbackBox:hide()
 
 function ThresholdUI:FeedbackToggle()
     -- Inactive bar is not being shown
-    if not resumeNamedTimer(self.AppName, self.AppName .. ".InactiveTimer") then
+    if self.InactiveContainer.hidden then
         -- We have no feedback: hide
-        if not gmcp.Char.Feedback or not #gmcp.Char.Feedback then
+        if not gmcp.Char or not gmcp.Char.Feedback or not #gmcp.Char.Feedback then
             self.FeedbackBox:hide()
             setBorderBottom(self.metrics.height)
         -- We have feedback: show
@@ -39,8 +39,10 @@ function ThresholdUI:FeedbackToggle()
         self.FeedbackBox:hide()
     end
 end
+ThresholdUI:FeedbackToggle()
 
 function ThresholdUI:UpdateFeedback()
+    if self.FeedbackBox.hidden then self:FeedbackToggle() end
     for _, v in ipairs(self.FeedbackLabels) do
         local label = "Feedback_" .. Capitalize(v)
         local found = false
