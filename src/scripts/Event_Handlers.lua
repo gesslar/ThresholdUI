@@ -12,9 +12,7 @@ ThresholdUI.EventHandlers = ThresholdUI.EventHandlers or {
     {"gmcp.Char.Status", "Inactive", f[[ThresholdUI:DoInactiveTimer]]},
     {"ThresholdUI.ToggleHealTick", nil, f[[ThresholdUI:ToggleHealTick]]},
     {"ThresholdUI.ToggleTimeBox", nil, f[[ThresholdUI:ToggleTimeBox]]},
-    {"gmcp.Char.Feedback", nil, f[[ThresholdUI:UpdateFeedback]]},
-    {"ThresholdUI.FeedbackToggle", nil, f[[ThresholdUI:FeedbackToggle]]},
-    {"gmcp.Char.Feedback", nil, f[[ThresholdUI:UpdateFeedback]]},
+    {"gmcp.Char.Feedback", "Feedback", f[[ThresholdUI:UpdateFeedback]]},
     {"ThresholdUI.FeedbackToggle", nil, f[[ThresholdUI:FeedbackToggle]]},
 }
 
