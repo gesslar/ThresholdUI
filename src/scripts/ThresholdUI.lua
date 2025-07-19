@@ -37,7 +37,12 @@ ThresholdUI.metrics = {
   fontPaddingY = 2,
   gaugeLabelFontSize = 12,
   gaugeFontSize = 13,
-  inactiveFontSize = 11
+  inactiveFontSize = 11,
+  meterFontSize = 8,
+  dateFontSize = 12,
+  dayFontSize = 11,
+  hourFontSize = 11,
+  devotionFontSize = 12,
 }
 
 local function round(num)

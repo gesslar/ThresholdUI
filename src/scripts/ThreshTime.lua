@@ -18,6 +18,15 @@ ThreshTime = ThreshTime or {
   }
 }
 
+-- Let's find the longest devotion name
+local longest = 0
+for _, devotion in ipairs(ThreshTime.config.devotions) do
+  local length = #devotion
+
+  longest = length > longest and length or longest
+end
+ThreshTime.config.longestDevotion = longest
+
 function ThreshTime:getTime(current)
   -- The results will be put in this variable to be returned
   local results = {}
@@ -96,7 +105,7 @@ function ThreshTime:getTime(current)
   local devotionCount = #self.config.devotions
   local devotionDaysDuration = 24
   local currentDay = ( ( results.month - 1 ) * 30 ) + results.day
-  local devotionIndex = math.floor( currentDay / devotionDaysDuration ) + 1
+  local devotionIndex = math.floor(currentDay / devotionDaysDuration) + 1
 
   if devotionIndex <= devotionCount then
     results.devotion = self.config.devotions[devotionIndex]

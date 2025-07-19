@@ -1,5 +1,5 @@
 local FontName = "Ubuntu"
-local DateTimeFontName = "Ubuntu"
+local DateTimeFontName = FontName
 local Font = f[[ font-family: '{FontName}'; ]]
 local DateTimeFont = f[[ font-family: '{DateTimeFontName}'; ]]
 local MainTextFont = f[[ {Font} ]]
@@ -14,6 +14,8 @@ local GaugeTextFont = f[[ {Font} {MainTextColour} ]]
 local GaugeBorder = "border-radius: 3px; border: 1px solid rgba(224, 173, 45, 22%);"
 local GaugeMargin = "margin: 2px 3px;"
 local MeterBorder = "border-radius: 3px; border: 1px solid rgba(20, 20, 20, 100%);"
+local MeterFontName = FontName
+local MeterTextFont = f[[ {Font} {MainTextColour} ]]
 local MeterFGColour = "background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #ffddc9, stop: 0.1 #9e6e3a, stop: 0.95 #6a4825, stop: 1 #ffddc9);"
 local MeterBGColour = "background: rgba(224, 173, 45, 15%);"
 local MeterLabel = "background-color: rgba(0,0,0,0%); color: rgba(224, 173, 45, 100%); qproperty-alignment: 'AlignCenter | AlignVCenter';"
@@ -57,6 +59,8 @@ ThresholdUI.Styles = ThresholdUI.Styles or {
   MeterFront = f[[ {MeterFGColour} {MeterBorder} ]],
   MeterBack = f[[ {MeterBGColour} {MeterBorder} ]],
   MeterLabel = f[[ {MeterLabel} ]],
+  MeterFontName = MeterFontName,
+  MeterTextFont = MeterTextFont,
 
   DateTimeLabel = f[[ {DateTimeFont} color: rgba(224, 173, 45, 100%); {Transparent} letter-spacing: 1px; {Center} ]],
 
@@ -85,8 +89,6 @@ function ThresholdUI:AdjustFontMetrics()
     local width, height = calcFontSize(value, FontName)
     local dimKey = string.gsub(key, "FontSize$", "Dim")
 
-    print("Processing: " .. key .. " -> " .. dimKey)
-
     self.metrics[dimKey] = {
       width = width + (self.metrics.fontPaddingX * 2),
       height = height + (self.metrics.fontPaddingY * 2)
@@ -100,19 +102,4 @@ function ThresholdUI:AdjustFontMetrics()
     width = widthest,
     height = heightest,
   }
-
-  display(self.metrics)
 end
-
--- ThresholdUI.metrics = {
---   height = 80,
---   inactiveHeight = 20,
---   gaugeLabelFontSize = 12,
---   gaugeFontSize = 13,
---   inactiveFontSize = 11
--- }
-
-setBorderBottom(ThresholdUI.metrics.height)
--- setBorderColor(18,22,25)
--- setBgColor(12,14,16)
--- setBackgroundColor(12,14,16)

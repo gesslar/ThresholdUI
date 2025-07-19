@@ -1,13 +1,24 @@
+-- Let's find out how big everything is!
+local numMeters = 4
+local metersBoxWidth = numMeters * (ThresholdUI.metrics.devotionDim.width)
+local DateTimeBgWidth = ThresholdUI.metrics.devotionDim.width * ThreshTime.config.longestDevotion
+
+local RightBoxWidth = metersBoxWidth + DateTimeBgWidth
+
 ThresholdUI.RightBox = ThresholdUI.RightBox or Geyser.HBox:new({
   name = "RightBox",
-  width = 141,
+  width = RightBoxWidth,
   h_policy = Geyser.Fixed
 }, ThresholdUI.BarBox)
+
+-- We need to know how wide to make the meters, since that box is going to be
+-- statically sized and the time stuff will be auto.
+
 
 -- Meters
 ThresholdUI.MetersBox = ThresholdUI.MetersBox or Geyser.HBox:new({
   name = "MetersBox",
-  width = 40,
+  width = metersBoxWidth,
   h_policy = Geyser.Fixed
 }, ThresholdUI.RightBox)
 
@@ -28,9 +39,10 @@ ThresholdUI.CapacityBar:setStyleSheet(
 
 ThresholdUI.CapacityLabel = ThresholdUI.CapacityLabel or Geyser.Label:new({
   name = "CapacityLabel",
-  width = "100%", height = 15,
+  width = "100%", height = ThresholdUI.metrics.maxDim.height,
   v_policy = Geyser.Fixed,
-  message = "C"
+  message = "C",
+  font = ThresholdUI.Styles.MeterFontName, fontSize = ThresholdUI.metrics.meterFontSize,
 }, ThresholdUI.CapacityBox)
 ThresholdUI.CapacityLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
 ThresholdUI.CapacityLabel:echo(nil, "nocolor", nil)
@@ -52,9 +64,10 @@ ThresholdUI.TummyBar:setStyleSheet(
 
 ThresholdUI.TummyLabel = ThresholdUI.TummyLabel or Geyser.Label:new({
   name = "TummyLabel",
-  width = "100%", height = 15,
+  width = "100%", height = ThresholdUI.metrics.maxDim.height,
   v_policy = Geyser.Fixed,
-  message = "T"
+  message = "T",
+  font = ThresholdUI.Styles.MeterFontName, fontSize = ThresholdUI.metrics.meterFontSize,
 }, ThresholdUI.TummyBox)
 
 ThresholdUI.TummyLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
@@ -77,9 +90,10 @@ ThresholdUI.HealBankBar:setStyleSheet(
 
 ThresholdUI.HealBankLabel = ThresholdUI.HealBankLabel or Geyser.Label:new({
   name = "HealBankLabel",
-  width = "100%", height = 15,
+  width = "100%", height = ThresholdUI.metrics.maxDim.height,
   v_policy = Geyser.Fixed,
-  message = "H"
+  message = "H",
+  font = ThresholdUI.Styles.MeterFontName, fontSize = ThresholdUI.metrics.meterFontSize,
 },ThresholdUI.HealBankBox)
 
 ThresholdUI.HealBankLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
@@ -94,6 +108,7 @@ ThresholdUI.HealTickBar = ThresholdUI.HealTickBar or Geyser.Gauge:new({
   name = "HealTickBar",
   orientation = "vertical"
 }, ThresholdUI.HealTickBox)
+
 ThresholdUI.HealTickBar:setStyleSheet(
   ThresholdUI.Styles.MeterFront,
   ThresholdUI.Styles.MeterBack
@@ -101,9 +116,10 @@ ThresholdUI.HealTickBar:setStyleSheet(
 
 ThresholdUI.HealTickLabel = ThresholdUI.HealTickLabel or Geyser.Label:new({
   name = "HealTickLabel",
-  width = "100%", height = 15,
+  width = "100%", height = ThresholdUI.metrics.maxDim.height,
   v_policy = Geyser.Fixed,
-  message = "R"
+  message = "R",
+  font = ThresholdUI.Styles.MeterFontName, fontSize = ThresholdUI.metrics.meterFontSize,
 }, ThresholdUI.HealTickBox)
 
 ThresholdUI.HealTickLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
@@ -171,10 +187,10 @@ end
 -- Clock
 
 -- Background label to prevent bleeding colours
-local DateTimeBgWidth = 100 -- Required in order to get the resizing to work
 ThresholdUI.DateTimeBg = ThresholdUI.DateTimeBg or Geyser.Label:new({
   name = "DateTimeBg",
   width = DateTimeBgWidth, height = ThresholdUI.metrics.height,
+  h_policy = Geyser.Fixed,
   stylesheet = ThresholdUI.Styles.DateTimeLabel
 }, ThresholdUI.RightBox)
 
@@ -186,25 +202,25 @@ ThresholdUI.DateTimeBox = ThresholdUI.DateTimeBox or Geyser.VBox:new({
 
 ThresholdUI.DateLabel = ThresholdUI.DateLabel or Geyser.Label:new({
   name = "DateLabel",
-  font = ThresholdUI.Styles.DateTimeFont, fontSize = 12,
+  font = ThresholdUI.Styles.DateTimeFont, fontSize = ThresholdUI.metrics.dateFontSize,
   stylesheet = ThresholdUI.Styles.DateTimeLabel
 }, ThresholdUI.DateTimeBox)
 
 ThresholdUI.DayLabel = ThresholdUI.DayLabel or Geyser.Label:new({
   name = "DayLabel",
-  font = ThresholdUI.Styles.DateTimeFont, fontSize = 11,
+  font = ThresholdUI.Styles.DateTimeFont, fontSize = ThresholdUI.metrics.dayFontSize,
   stylesheet = ThresholdUI.Styles.DateTimeLabel
 }, ThresholdUI.DateTimeBox)
 
 ThresholdUI.TimeLabel = ThresholdUI.TimeLabel or Geyser.Label:new({
   name = "TimeLabel",
-  font = ThresholdUI.Styles.DateTimeFont, fontSize = 11,
+  font = ThresholdUI.Styles.DateTimeFont, fontSize = ThresholdUI.metrics.hourFontSize,
   stylesheet = ThresholdUI.Styles.DateTimeLabel
 }, ThresholdUI.DateTimeBox)
 
 ThresholdUI.Devotion = ThresholdUI.Devotion or Geyser.Label:new({
   name = "DevotionLabel",
-  font = ThresholdUI.Styles.DateTimeFont, fontSize = 10,
+  font = ThresholdUI.Styles.DateTimeFont, fontSize = ThresholdUI.metrics.devotionFontSize,
   stylesheet = ThresholdUI.Styles.DateTimeLabel
 }, ThresholdUI.DateTimeBox)
 
