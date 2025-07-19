@@ -20,6 +20,7 @@ local MeterFGColour = "background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 1, 
 local MeterBGColour = "background: rgba(224, 173, 45, 15%);"
 local MeterLabel = "background-color: rgba(0,0,0,0%); color: rgba(224, 173, 45, 100%); qproperty-alignment: 'AlignCenter | AlignVCenter';"
 local FeedbackBorder = "border-radius: 3px; border: 1px solid rgba(20, 20, 20, 100%);"
+local FeedbackFont = FontName
 local Transparent = "background-color: rgba(0,0,0,0%);"
 
 ThresholdUI.Styles = ThresholdUI.Styles or {
@@ -65,9 +66,11 @@ ThresholdUI.Styles = ThresholdUI.Styles or {
   DateTimeLabel = f[[ {DateTimeFont} color: rgba(224, 173, 45, 100%); {Transparent} letter-spacing: 1px; {Center} ]],
 
   InactiveLabel = f[[ {Font} {MainTextColour} letter-spacing: 1px; {Center} ]],
+  InactiveFont = FontName,
 
   FeedbackInactive = f[[ {FeedbackBorder} color: rgb(47,79,79); background-color: rgb(0,0,0); ]],
   FeedbackActive = f[[ {FeedbackBorder} color: rgb(255,215,0); background-color: rgb(0,83,160); ]],
+  FeedbackFont = FeedbackFont,
 }
 
 function ThresholdUI:AdjustFontMetrics()

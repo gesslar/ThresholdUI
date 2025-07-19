@@ -1,9 +1,15 @@
+local mainHeight = ThresholdUI.metrics.height
+local inactiveHeight = ThresholdUI.metrics.inactiveHeight
+local totalHeight = ThresholdUI.metrics.totalHeight
+local fontName = ThresholdUI.Styles.FeedbackFont
+local fontSize = ThresholdUI.metrics.inactiveFontSize
+
 ThresholdUI.Feedback = ThresholdUI.Feedback or {}
 ThresholdUI.FeedbackLabels = {"shock", "net", "mastery", "gaze"}
 ThresholdUI.FeedbackBox = ThresholdUI.FeedbackBox or Geyser.HBox:new({
   name = "FeedbackContainer",
-  x = 0, y = -(ThresholdUI.metrics.height + ThresholdUI.metrics.inactiveHeight),
-  height = ThresholdUI.metrics.inactiveHeight, width = "100%",
+  x = 0, y = -totalHeight,
+  height = inactiveHeight, width = "100%",
 })
 
 -- Create the labels for each feedback ability
@@ -11,7 +17,8 @@ for _, v in ipairs(ThresholdUI.FeedbackLabels) do
   local label = "Feedback_" .. Capitalize(v)
   ThresholdUI[label] = ThresholdUI[label] or Geyser.Label:new({
     name = label,
-    message = f([[<center>{v}</center>]])
+    message = f([[<center>{v}</center>]]),
+    font = fontName, fontSize = fontSize,
   }, ThresholdUI.FeedbackBox)
 
   ThresholdUI[label]:echo(nil, "nocolor", "bc")
@@ -24,15 +31,17 @@ ThresholdUI.FeedbackBox:hide()
 function ThresholdUI:FeedbackToggle()
   -- Inactive bar is not being shown
   if self.InactiveContainer.hidden then
+
+  if not gmcp.Char or not gmcp.Char.Feedback or not #gmcp.Char.Feedback then
     -- We have no feedback: hide
-    if not gmcp.Char or not gmcp.Char.Feedback or not #gmcp.Char.Feedback then
-      self.FeedbackBox:hide()
-      setBorderBottom(self.metrics.height)
-      -- We have feedback: show
-    else
-      self.FeedbackBox:show()
-      setBorderBottom(self.metrics.height + self.metrics.inactiveHeight)
-    end
+    self.FeedbackBox:hide()
+    setBorderBottom(mainHeight)
+  else
+    -- We have feedback: show
+    self.FeedbackBox:show()
+
+    setBorderBottom(totalHeight)
+  end
 
   -- Inactive bar is being shown
   else
