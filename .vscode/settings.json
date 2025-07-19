@@ -1,0 +1,10 @@
+{
+  "Lua.runtime.version": "Lua 5.1",
+  "Lua.diagnostics.globals": [
+    "gmod",
+    "mudlet"
+  ],
+  "Lua.diagnostics.disable": [
+    "lowercase-global"
+  ]
+}
