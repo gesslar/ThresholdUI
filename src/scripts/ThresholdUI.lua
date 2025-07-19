@@ -33,9 +33,11 @@ ThresholdUI.Vitals = ThresholdUI.Vitals or {
 ThresholdUI.metrics = {
   height = 80,
   inactiveHeight = 20,
-  gauge_label_font_size = 12,
-  gauge_font_size = 13,
-  inactive_font_size = 11
+  fontPaddingX = 2,
+  fontPaddingY = 2,
+  gaugeLabelFontSize = 12,
+  gaugeFontSize = 13,
+  inactiveFontSize = 11
 }
 
 local function round(num)
@@ -45,7 +47,6 @@ local function round(num)
     return math.ceil(num - 0.5)
   end
 end
-
 
 -- Bar updater
 function ThresholdUI:SetBarValue(bar, curr, max, text)

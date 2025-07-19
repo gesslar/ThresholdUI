@@ -24,7 +24,7 @@ ThresholdUI.HPBar:setStyleSheet(
   ThresholdUI.Styles.HPBack,
   ThresholdUI.Styles.GaugeText
 )
-ThresholdUI.HPBar.text:setFontSize(ThresholdUI.metrics.gauge_font_size)
+ThresholdUI.HPBar.text:setFontSize(ThresholdUI.metrics.gaugeFontSize)
 ThresholdUI.HPBar.text:echo(nil, "nocolor", nil)
 
 ThresholdUI.HPLabel = ThresholdUI.HPLabel or Geyser.Label:new({
@@ -35,7 +35,7 @@ ThresholdUI.HPLabel = ThresholdUI.HPLabel or Geyser.Label:new({
 }, ThresholdUI.HPContainer)
 
 ThresholdUI.HPLabel:setStyleSheet(ThresholdUI.Styles.GaugeLabel)
-ThresholdUI.HPLabel:setFontSize(ThresholdUI.metrics.gauge_label_font_size)
+ThresholdUI.HPLabel:setFontSize(ThresholdUI.metrics.gaugeLabelFontSize)
 ThresholdUI.HPLabel:echo(nil, "nocolor", nil)
 
 -- SP
@@ -57,7 +57,7 @@ ThresholdUI.SPBar:setStyleSheet(
   ThresholdUI.Styles.GaugeText
 )
 
-ThresholdUI.SPBar.text:setFontSize(ThresholdUI.metrics.gauge_font_size)
+ThresholdUI.SPBar.text:setFontSize(ThresholdUI.metrics.gaugeFontSize)
 ThresholdUI.SPBar.text:echo(nil, "nocolor", nil)
 
 ThresholdUI.SPLabel = ThresholdUI.SPLabel or Geyser.Label:new({
@@ -68,7 +68,7 @@ ThresholdUI.SPLabel = ThresholdUI.SPLabel or Geyser.Label:new({
 }, ThresholdUI.SPContainer)
 
 ThresholdUI.SPLabel:setStyleSheet(ThresholdUI.Styles.GaugeLabel)
-ThresholdUI.SPLabel:setFontSize(ThresholdUI.metrics.gauge_label_font_size)
+ThresholdUI.SPLabel:setFontSize(ThresholdUI.metrics.gaugeLabelFontSize)
 ThresholdUI.SPLabel:echo(nil, "nocolor", nil)
 
 -- EP
@@ -89,7 +89,7 @@ ThresholdUI.EPBar:setStyleSheet(
     ThresholdUI.Styles.EPBack,
     ThresholdUI.Styles.GaugeText
 )
-ThresholdUI.EPBar.text:setFontSize(ThresholdUI.metrics.gauge_font_size)
+ThresholdUI.EPBar.text:setFontSize(ThresholdUI.metrics.gaugeFontSize)
 ThresholdUI.EPBar.text:echo(nil, "nocolor", nil)
 
 ThresholdUI.EPLabel = ThresholdUI.EPLabel or Geyser.Label:new({
@@ -100,7 +100,7 @@ ThresholdUI.EPLabel = ThresholdUI.EPLabel or Geyser.Label:new({
 }, ThresholdUI.EPContainer)
 
 ThresholdUI.EPLabel:setStyleSheet(ThresholdUI.Styles.GaugeLabel)
-ThresholdUI.EPLabel:setFontSize(ThresholdUI.metrics.gauge_label_font_size)
+ThresholdUI.EPLabel:setFontSize(ThresholdUI.metrics.gaugeLabelFontSize)
 ThresholdUI.EPLabel:echo(nil, "nocolor", nil)
 
 function ThresholdUI:UpdateVitals()

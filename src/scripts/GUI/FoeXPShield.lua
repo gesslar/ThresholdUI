@@ -24,7 +24,7 @@ ThresholdUI.FoeBar:setStyleSheet(
   ThresholdUI.Styles.GaugeText
 )
 
-ThresholdUI.FoeBar.text:setFontSize(ThresholdUI.metrics.gauge_font_size)
+ThresholdUI.FoeBar.text:setFontSize(ThresholdUI.metrics.gaugeFontSize)
 ThresholdUI.FoeBar.text:echo(nil, "nocolor", nil)
 
 ThresholdUI.FoeLabel = ThresholdUI.FoeLabel or Geyser.Label:new({
@@ -35,7 +35,7 @@ ThresholdUI.FoeLabel = ThresholdUI.FoeLabel or Geyser.Label:new({
 }, ThresholdUI.FoeContainer)
 
 ThresholdUI.FoeLabel:setStyleSheet(ThresholdUI.Styles.GaugeLabel)
-ThresholdUI.FoeLabel:setFontSize(ThresholdUI.metrics.gauge_label_font_size)
+ThresholdUI.FoeLabel:setFontSize(ThresholdUI.metrics.gaugeLabelFontSize)
 ThresholdUI.FoeLabel:echo(nil, "nocolor", nil)
 
 ThresholdUI.FoeFoeLabel = ThresholdUI.FoeFoeLabel or Geyser.Label:new({
@@ -45,7 +45,7 @@ ThresholdUI.FoeFoeLabel = ThresholdUI.FoeFoeLabel or Geyser.Label:new({
 }, ThresholdUI.FoeContainer)
 
 ThresholdUI.FoeFoeLabel:setStyleSheet(ThresholdUI.Styles.FoeFoeLabelStyle)
-ThresholdUI.FoeFoeLabel:setFontSize(ThresholdUI.metrics.gauge_label_font_size)
+ThresholdUI.FoeFoeLabel:setFontSize(ThresholdUI.metrics.gaugeLabelFontSize)
 ThresholdUI.FoeFoeLabel:echo(nil, "nocolor", nil)
 
 -- XP
@@ -64,7 +64,7 @@ ThresholdUI.XPBar:setStyleSheet(
   ThresholdUI.Styles.XPBack,
   ThresholdUI.Styles.GaugeText
 )
-ThresholdUI.XPBar.text:setFontSize(ThresholdUI.metrics.gauge_font_size)
+ThresholdUI.XPBar.text:setFontSize(ThresholdUI.metrics.gaugeFontSize)
 ThresholdUI.XPBar.text:echo(nil, "nocolor", nil)
 
 ThresholdUI.XPLabel = ThresholdUI.XPLabel or Geyser.Label:new({
@@ -75,7 +75,7 @@ ThresholdUI.XPLabel = ThresholdUI.XPLabel or Geyser.Label:new({
 },ThresholdUI.XPContainer)
 
 ThresholdUI.XPLabel:setStyleSheet(ThresholdUI.Styles.GaugeLabel)
-ThresholdUI.XPLabel:setFontSize(ThresholdUI.metrics.gauge_label_font_size)
+ThresholdUI.XPLabel:setFontSize(ThresholdUI.metrics.gaugeLabelFontSize)
 ThresholdUI.XPLabel:echo(nil, "nocolor", nil)
 
 -- Shielding
@@ -97,7 +97,7 @@ ThresholdUI.ShieldBar:setStyleSheet(
   ThresholdUI.Styles.GaugeText
 )
 
-ThresholdUI.ShieldBar.text:setFontSize(ThresholdUI.metrics.gauge_font_size)
+ThresholdUI.ShieldBar.text:setFontSize(ThresholdUI.metrics.gaugeFontSize)
 ThresholdUI.ShieldBar.text:echo(nil, "nocolor", nil)
 
 ThresholdUI.ShieldLabel = ThresholdUI.ShieldLabel or Geyser.Label:new({
@@ -108,7 +108,7 @@ ThresholdUI.ShieldLabel = ThresholdUI.ShieldLabel or Geyser.Label:new({
 }, ThresholdUI.ShieldContainer)
 
 ThresholdUI.ShieldLabel:setStyleSheet(ThresholdUI.Styles.GaugeLabel)
-ThresholdUI.ShieldLabel:setFontSize(ThresholdUI.metrics.gauge_label_font_size)
+ThresholdUI.ShieldLabel:setFontSize(ThresholdUI.metrics.gaugeLabelFontSize)
 ThresholdUI.ShieldLabel:echo(nil, "nocolor", nil)
 ThresholdUI.ShieldContainer:hide()
 

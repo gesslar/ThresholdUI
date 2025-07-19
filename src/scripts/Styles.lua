@@ -66,6 +66,52 @@ ThresholdUI.Styles = ThresholdUI.Styles or {
   FeedbackActive = f[[ {FeedbackBorder} color: rgb(255,215,0); background-color: rgb(0,83,160); ]],
 }
 
+function ThresholdUI:AdjustFontMetrics()
+  local FontName = self.Styles.FontName
+  local heightest = 0
+  local widthest = 0
+
+  -- First, collect all FontSize keys
+  local fontSizeKeys = {}
+  for key, value in pairs(self.metrics) do
+    if string.match(key, "FontSize$") then
+      table.insert(fontSizeKeys, key)
+    end
+  end
+
+  -- Now process them
+  for _, key in ipairs(fontSizeKeys) do
+    local value = self.metrics[key]
+    local width, height = calcFontSize(value, FontName)
+    local dimKey = string.gsub(key, "FontSize$", "Dim")
+
+    print("Processing: " .. key .. " -> " .. dimKey)
+
+    self.metrics[dimKey] = {
+      width = width + (self.metrics.fontPaddingX * 2),
+      height = height + (self.metrics.fontPaddingY * 2)
+    }
+
+    widthest = self.metrics[dimKey].width > widthest and self.metrics[dimKey].width or widthest
+    heightest = self.metrics[dimKey].height > heightest and self.metrics[dimKey].height or heightest
+  end
+
+  self.metrics.maxDim = {
+    width = widthest,
+    height = heightest,
+  }
+
+  display(self.metrics)
+end
+
+-- ThresholdUI.metrics = {
+--   height = 80,
+--   inactiveHeight = 20,
+--   gaugeLabelFontSize = 12,
+--   gaugeFontSize = 13,
+--   inactiveFontSize = 11
+-- }
+
 setBorderBottom(ThresholdUI.metrics.height)
 -- setBorderColor(18,22,25)
 -- setBgColor(12,14,16)

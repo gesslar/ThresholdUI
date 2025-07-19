@@ -9,7 +9,7 @@ ThresholdUI.InactiveLabel = ThresholdUI.InactiveLabel or Geyser.Label:new({
   x = 0, y = 0,
   width = "100%", height = "100%",
   stylesheet = ThresholdUI.Styles.InactiveLabel,
-  fontSize = ThresholdUI.metrics.inactive_font_size,
+  fontSize = ThresholdUI.metrics.inactiveFontSize,
   message = "You have been inactive for 0s"
 }, ThresholdUI.InactiveContainer)
 
