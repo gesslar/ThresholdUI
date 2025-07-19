@@ -9,7 +9,9 @@ function ThresholdUI:Install(event, package)
   deleteNamedEventHandler(self.AppName, self.AppName..".sysInstall")
 
   self:ConnectionScript()
-  cecho("Thank you for installing ThresholdUI!\nInitializing GMCP in Threshold.\n")
+  cecho("<red>Thank you for installing ThresholdUI!\n")
+  echo("\n")
+  cecho("<blue>Initializing GMCP in Threshold.\n")
 
   tempTimer(1, f[[send("gmcp reset", false)]])
 end

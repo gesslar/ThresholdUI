@@ -1,7 +1,13 @@
+local mainHeight = ThresholdUI.metrics.height
+local inactiveHeight = ThresholdUI.metrics.inactiveHeight
+local totalHeight = ThresholdUI.metrics.totalHeight
+local fontName = ThresholdUI.Styles.InactiveFont
+local fontSize = ThresholdUI.metrics.inactiveFontSize
+
 ThresholdUI.InactiveContainer = ThresholdUI.InactiveContainer or Geyser.Container:new({
   name = "InactiveContainer",
-  x = 0, y = -(ThresholdUI.metrics.height + ThresholdUI.metrics.inactiveHeight)+2,
-  width = "100%", height = ThresholdUI.metrics.inactiveHeight,
+  x = 0, y = -(totalHeight)+2,
+  width = "100%", height = inactiveHeight,
 })
 
 ThresholdUI.InactiveLabel = ThresholdUI.InactiveLabel or Geyser.Label:new({
@@ -9,7 +15,7 @@ ThresholdUI.InactiveLabel = ThresholdUI.InactiveLabel or Geyser.Label:new({
   x = 0, y = 0,
   width = "100%", height = "100%",
   stylesheet = ThresholdUI.Styles.InactiveLabel,
-  fontSize = ThresholdUI.metrics.inactiveFontSize,
+  font = fontName, fontSize = fontSize,
   message = "You have been inactive for 0s"
 }, ThresholdUI.InactiveContainer)
 
@@ -20,7 +26,7 @@ ThresholdUI.InactiveStart = nil
 ThresholdUI.InactiveType = ""
 ThresholdUI.InactivePhase = 0  -- Start at black
 ThresholdUI.BreathSpeed = 0.02
-ThresholdUI.BrightColor = {r = 18, g = 22, b = 25}  -- Previously the middle color, now the brightest
+ThresholdUI.BrightColor = {r = 18, g = 22, b = 25}
 
 function ThresholdUI:UpdateInactiveGradient()
   local style = ThresholdUI.Styles.InactiveLabel
@@ -100,7 +106,7 @@ function ThresholdUI:StartInactiveTimer()
   self:UpdateInactiveGradient() -- Reset the gradient
   self.InactiveContainer:show()
 
-  setBorderBottom(self.metrics.height + self.metrics.inactiveHeight)
+  setBorderBottom(totalHeight)
   registerNamedTimer(self.AppName, self.Timers.InactiveTimer, 0.1, function() self:UpdateInactiveDisplay() end, true)
   registerNamedTimer(self.AppName, self.Timers.InactiveEffectTimer, 0.05, function() self:UpdateInactiveGradient() end, true)
 end
@@ -113,7 +119,7 @@ function ThresholdUI:CancelInactiveTimer()
   self.InactiveStart = nil
   self.InactiveContainer:hide()
 
-  setBorderBottom(self.metrics.height)
+  setBorderBottom(mainHeight)
   deleteNamedTimer(self.AppName, self.Timers.InactiveTimer)
   deleteNamedTimer(self.AppName, self.Timers.InactiveEffectTimer)
 end
