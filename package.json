@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "build": "/home/gesslar/bin/muddle-shadow-1.1.0/bin/muddle",
-    "watch": "/home/gesslar/bin/muddle-shadow-1.1.0/bin/muddle -w"
+    "watch": "/home/gesslar/bin/muddle-shadow-1.1.0/bin/muddle -w",
+    "pr": "gt submit --publish --restack --ai"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gesslar/ThresholdUI.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "Unlicense",
   "bugs": {
     "url": "https://github.com/gesslar/ThresholdUI/issues"
   },
