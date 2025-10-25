@@ -1,5 +1,5 @@
-ThresholdUI.BarBox = ThresholdUI.BarBox or
-  Geyser.HBox:new({
-        name = "BarBox",
-        x = 0, y = 0, width = "100%", height = "100%"
-    }, ThresholdUI.MainContainer)
+ThresholdUI.BarBox = ThresholdUI.BarBox or Geyser.HBox:new({
+  name = "BarBox",
+  x = 0, y = 0,
+  width = "100%", height = "100%"
+}, ThresholdUI.MainContainer)

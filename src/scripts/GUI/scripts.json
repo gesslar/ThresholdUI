@@ -1,44 +1,50 @@
 [
-       {
-              "isActive": "yes",
-              "isFolder": "no",
-              "name": "Inactive Container",
-              "script": ""
-       },
-       {
-              "isActive": "yes",
-              "isFolder": "no",
-              "name": "Feedback",
-              "script": ""
-       },
-       {
-              "isActive": "yes",
-              "isFolder": "no",
-              "name": "Main Container",
-              "script": ""
-       },
-       {
-              "isActive": "yes",
-              "isFolder": "no",
-              "name": "BarContainer",
-              "script": ""
-       },
-       {
-              "isActive": "yes",
-              "isFolder": "no",
-              "name": "Vitals",
-              "script": ""
-       },
-       {
-              "isActive": "yes",
-              "isFolder": "no",
-              "name": "FoeXPShield",
-              "script": ""
-       },
-       {
-              "isActive": "yes",
-              "isFolder": "no",
-              "name": "MetersTime",
-              "script": ""
-       }
+  {
+    "isActive": "yes",
+    "isFolder": "no",
+    "name": "Inactive Container",
+    "script": ""
+  },
+  {
+    "isActive": "yes",
+    "isFolder": "no",
+    "name": "Feedback",
+    "script": ""
+  },
+  {
+    "isActive": "yes",
+    "isFolder": "no",
+    "name": "Main Container",
+    "script": ""
+  },
+  {
+    "isActive": "yes",
+    "isFolder": "no",
+    "name": "BarContainer",
+    "script": ""
+  },
+  {
+    "isActive": "yes",
+    "isFolder": "no",
+    "name": "Vitals",
+    "script": ""
+  },
+  {
+    "isActive": "yes",
+    "isFolder": "no",
+    "name": "FoeXPShield",
+    "script": ""
+  },
+  {
+    "isActive": "yes",
+    "isFolder": "no",
+    "name": "MetersTime",
+    "script": ""
+  },
+  {
+    "isActive": "yes",
+    "isFolder": "no",
+    "name": "SettleDown",
+    "script": ""
+  }
 ]
