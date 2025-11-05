@@ -72,8 +72,8 @@ ThresholdUI.Styles = ThresholdUI.Styles or {
 
 function ThresholdUI:AdjustFontMetrics()
   local FontName = self.Styles.FontName
-  local heightest = 0
-  local widthest = 0
+  local tallest = 0
+  local widest = 0
 
   -- First, collect all FontSize keys
   local fontSizeKeys = {}
@@ -94,12 +94,12 @@ function ThresholdUI:AdjustFontMetrics()
       height = height + (self.metrics.fontPaddingY * 2)
     }
 
-    widthest = self.metrics[dimKey].width > widthest and self.metrics[dimKey].width or widthest
-    heightest = self.metrics[dimKey].height > heightest and self.metrics[dimKey].height or heightest
+    widest = self.metrics[dimKey].width > widest and self.metrics[dimKey].width or widest
+    tallest = self.metrics[dimKey].height > tallest and self.metrics[dimKey].height or tallest
   end
 
   self.metrics.maxDim = {
-    width = widthest,
-    height = heightest,
+    width = widest,
+    height = tallest,
   }
 end
