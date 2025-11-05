@@ -4,24 +4,25 @@ ThresholdUI is a lightweight, scriptable graphical user interface package for Mu
 
 ## Key features
 
-- Modular Lua-based GUI components (see `src/GUI/`)
+- Modular Lua-based GUI components (see `src/scripts/GUI/`)
 - Timers, styles, and event handlers for in-game thresholds and meters
 - Packaged build in `build/ThresholdUI.mpackage` for easy import into Mudlet
 
 ## Repository layout
 
-- `src/` - source Lua scripts and GUI modules used during development
+- `src/` - source Lua scripts and supporting assets used during development
   - `scripts/` - core scripts (connection, event handlers, timers, styles)
-  - `GUI/` - GUI components and containers
+  - `scripts/GUI/` - GUI components and containers loaded by the scripts
   - `aliases/` - example aliases and helper scripts
-- `build/` - output packages and XML used for distribution (`ThresholdUI.mpackage`, `ThresholdUI.xml`)
-- `tmp/` - temporary files and generated preferences used while testing
-- `filtered/` - filtered build artifacts (internal packaging scaffolding)
+  - `resources/` - bundled assets such as images and preference defaults
 - `package.json` - project metadata; may include build/tooling configuration
+- `mfile` - Mudlet package manifest used when exporting
+
+> **Note:** Historical references to `build/`, `tmp/`, or `filtered/` directories refer to paths that are generated during packaging and are not checked into the repository. Packaging tools will create them when you run the export workflow.
 
 ## Installation
 
-1. Import the provided package: open Mudlet and import `build/ThresholdUI.mpackage` or `build/ThresholdUI.xml` using Mudlet's package import UI.
+1. Import a packaged release: open Mudlet and import the generated `ThresholdUI.mpackage` or `ThresholdUI.xml` (produced by the export workflow in the `build/` directory).
 2. Alternatively, copy the relevant `src/` Lua files into your Mudlet profile's scripts directory.
 
 After installing, restart Mudlet or reload your profile to ensure scripts initialize correctly.
@@ -29,8 +30,8 @@ After installing, restart Mudlet or reload your profile to ensure scripts initia
 ## Development
 
 - Edit source files in `src/`. The primary entry points are in `src/scripts/` and `src/scripts/GUI/`.
-- Use the files in `tmp/` during iterative testing inside Mudlet.
-- The `build/` folder contains packaged outputs for distribution. If you maintain automated packaging, check `package.json` or project-specific build scripts for tooling details.
+- When exporting a package, Mudlet (or related tooling) will create a `build/` directory containing distributable `.mpackage` and `.xml` files.
+- If your workflow uses temporary testing outputs, keep them outside the repository or ensure they are ignored via tooling configuration.
 
 ## Contributing
 
