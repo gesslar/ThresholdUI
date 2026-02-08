@@ -1,13 +1,17 @@
 ThresholdUI.InactiveContainer = ThresholdUI.InactiveContainer or Geyser.Container:new({
   name = "InactiveContainer",
-  x = 0, y = -(ThresholdUI.metrics.height + ThresholdUI.metrics.inactiveHeight)+2,
-  width = "100%", height = ThresholdUI.metrics.inactiveHeight,
+  x = 0,
+  y = -(ThresholdUI.metrics.height + ThresholdUI.metrics.inactiveHeight) + 2,
+  width = "100%",
+  height = ThresholdUI.metrics.inactiveHeight,
 })
 
 ThresholdUI.InactiveLabel = ThresholdUI.InactiveLabel or Geyser.Label:new({
   name = "InactiveLabel",
-  x = 0, y = 0,
-  width = "100%", height = "100%",
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%",
   stylesheet = ThresholdUI.Styles.InactiveLabel,
   fontSize = ThresholdUI.metrics.inactiveFontSize,
   message = "You have been inactive for 0s"
@@ -18,14 +22,14 @@ ThresholdUI.InactiveContainer:hide()
 
 ThresholdUI.InactiveStart = nil
 ThresholdUI.InactiveType = ""
-ThresholdUI.InactivePhase = 0  -- Start at black
+ThresholdUI.InactivePhase = 0                        -- Start at black
 ThresholdUI.BreathSpeed = 0.02
-ThresholdUI.BrightColor = {r = 18, g = 22, b = 25}  -- Previously the middle color, now the brightest
+ThresholdUI.BrightColor = { r = 18, g = 22, b = 25 } -- Previously the middle color, now the brightest
 
 function ThresholdUI:UpdateInactiveGradient()
   local style = ThresholdUI.Styles.InactiveLabel
 
-  local t = math.sin(self.InactivePhase) * 0.5 + 0.5  -- Oscillate between 0 and 1
+  local t = math.sin(self.InactivePhase) * 0.5 + 0.5 -- Oscillate between 0 and 1
 
   -- Interpolate between black and bright color
   local r = math.floor(self.BrightColor.r * t)
@@ -57,19 +61,19 @@ function ThresholdUI:FormatDuration(duration)
   local answer
 
   if days > 0 then
-    answer = f"{answer or \"\"}{days}d "
+    answer = f "{answer or \"\"}{days}d "
   end
 
   if hours > 0 then
-    answer = f"{answer or \"\"}{hours}h "
+    answer = f "{answer or \"\"}{hours}h "
   end
 
   if minutes > 0 then
-    answer = f"{answer or \"\"}{minutes}m "
+    answer = f "{answer or \"\"}{minutes}m "
   end
 
   if seconds > 0 then
-    answer = f"{answer or \"\"}{seconds}s"
+    answer = f "{answer or \"\"}{seconds}s"
   end
 
   return answer
@@ -96,13 +100,14 @@ function ThresholdUI:StartInactiveTimer()
     self.InactiveType = "Resting"
   end
 
-  self.InactivePhase = 0  -- Start at black
+  self.InactivePhase = 0        -- Start at black
   self:UpdateInactiveGradient() -- Reset the gradient
   self.InactiveContainer:show()
 
   setBorderBottom(self.metrics.height + self.metrics.inactiveHeight)
   registerNamedTimer(self.AppName, self.Timers.InactiveTimer, 0.1, function() self:UpdateInactiveDisplay() end, true)
-  registerNamedTimer(self.AppName, self.Timers.InactiveEffectTimer, 0.05, function() self:UpdateInactiveGradient() end, true)
+  registerNamedTimer(self.AppName, self.Timers.InactiveEffectTimer, 0.05, function() self:UpdateInactiveGradient() end,
+    true)
 end
 
 function ThresholdUI:CancelInactiveTimer()

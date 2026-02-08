@@ -4,8 +4,8 @@
   "description": "The main Threshold Graphical User Interface package for Mudlet",
   "main": "index.js",
   "scripts": {
-    "build": "/home/gesslar/bin/muddle-shadow-1.1.0/bin/muddle",
-    "watch": "/home/gesslar/bin/muddle-shadow-1.1.0/bin/muddle -w",
+    "build": "pnpx @gesslar/muddy",
+    "watch": "pnpx @gesslar/muddy -w",
     "pr": "gt submit --publish --restack --ai"
   },
   "repository": {

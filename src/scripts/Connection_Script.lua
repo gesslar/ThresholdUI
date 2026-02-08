@@ -25,8 +25,8 @@ function ThresholdUI:DisconnectionScript()
 end
 
 ThresholdUI.ConnectionHandlers = {
-  {"sysConnectionEvent", function() ThresholdUI:ConnectionScript() end},
-  {"sysDisconnectionEvent", function() ThresholdUI:DisconnectionScript() end},
+  { "sysConnectionEvent",    function() ThresholdUI:ConnectionScript() end },
+  { "sysDisconnectionEvent", function() ThresholdUI:DisconnectionScript() end },
 }
 
 function ThresholdUI.modifyModules()
@@ -37,7 +37,7 @@ function ThresholdUI.modifyModules()
 
   -- Disable Modules
   local DisableString =
-    f[[Core.Supports.Remove [ {table.concat(ThresholdUI.disableModules, ", ")} ] ]]
+      f [[Core.Supports.Remove [ {table.concat(ThresholdUI.disableModules, ", ")} ] ]]
 
   sendGMCP(DisableString)
 end

@@ -1,11 +1,11 @@
 ThreshTime = ThreshTime or {
   config = {
-    epochStart = 631170000, -- The start of the game's clock in UNIX time
+    epochStart = 631170000,            -- The start of the game's clock in UNIX time
     start = { month = 1, year = 100 }, -- The first game day, arrays are 1-based
-    dayLength = 7200, -- The number of UNIX seconds in a game day
-    monthLength = 216000,   -- The number of UNIX seconds in a game month
-    daysInMonth = 30, -- The number of game days in a game month
-    yearLength = 2592000, -- The number of UNIX seconds in a game year
+    dayLength = 7200,                  -- The number of UNIX seconds in a game day
+    monthLength = 216000,              -- The number of UNIX seconds in a game month
+    daysInMonth = 30,                  -- The number of game days in a game month
+    yearLength = 2592000,              -- The number of UNIX seconds in a game year
     months = { "Dawn", "Cuspis", "Thawing", "Renasci", "Tempest", "Serenus", "Solaria", "Torrid", "Sojourn", "Hoerfest", "Twilight", "Deepchill" },
     days = { "Vidi", "Aubus", "Tikun", "Coronea", "Dashen", "Merida", "Solus", "Ganymor", "Dianis", "Misma", "Duskus", "Lunas" },
     seasonProgress = { 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0 },
@@ -104,13 +104,14 @@ function ThreshTime:getTime(current)
   -- Determine the Devotion
   local devotionCount = #self.config.devotions
   local devotionDaysDuration = 24
-  local currentDay = ( ( results.month - 1 ) * 30 ) + results.day
+  local currentDay = ((results.month - 1) * 30) + results.day
   local devotionIndex = math.floor(currentDay / devotionDaysDuration) + 1
 
   if devotionIndex <= devotionCount then
     results.devotion = self.config.devotions[devotionIndex]
   else
-    results.devotion = self.config.voidDevotion end
+    results.devotion = self.config.voidDevotion
+  end
 
   return results
 end

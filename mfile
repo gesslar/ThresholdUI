@@ -1,9 +1,9 @@
 {
   "package": "ThresholdUI",
   "title": "UI for ThresholdRPG",
-  "description": "Threshold RPG UI",
+  "description": "",
   "version": "4.2.0",
-  "author": "Gesslar",
+  "author": "gesslar",
   "icon": "griffon-right.jpg",
   "dependencies": "",
   "outputFile": true

@@ -8,14 +8,18 @@ ThresholdUI.VitalsBox = ThresholdUI.VitalsBox or Geyser.VBox:new({
 -- HP
 ThresholdUI.HPContainer = ThresholdUI.HPContainer or Geyser.Container:new({
   name = "HPContainer",
-  x = 0, y = 0,
-  width = "100%", height = "100%",
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%",
 }, ThresholdUI.VitalsBox);
 
 ThresholdUI.HPBar = ThresholdUI.HPBar or Geyser.Gauge:new({
   name = "HPBar",
-  x = 0, y = 0,
-  width = "100%", height = "100%",
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%",
   show_text = false
 }, ThresholdUI.HPContainer)
 
@@ -29,8 +33,10 @@ ThresholdUI.HPBar.text:echo(nil, "nocolor", nil)
 
 ThresholdUI.HPLabel = ThresholdUI.HPLabel or Geyser.Label:new({
   name = "HPLabel",
-  x = 0, y = 0,
-  width = "100%", height = "100%",
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%",
   message = "HP"
 }, ThresholdUI.HPContainer)
 
@@ -41,14 +47,18 @@ ThresholdUI.HPLabel:echo(nil, "nocolor", nil)
 -- SP
 ThresholdUI.SPContainer = ThresholdUI.SPContainer or Geyser.Container:new({
   name = "SPContainer",
-  x = 0, y = 0,
-  width = "100%", height = "100%",
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%",
 }, ThresholdUI.VitalsBox);
 
 ThresholdUI.SPBar = ThresholdUI.SPBar or Geyser.Gauge:new({
   name = "SPBar",
-  x = 0, y = 0,
-  width = "100%", height = "100%"
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%"
 }, ThresholdUI.SPContainer)
 
 ThresholdUI.SPBar:setStyleSheet(
@@ -62,8 +72,10 @@ ThresholdUI.SPBar.text:echo(nil, "nocolor", nil)
 
 ThresholdUI.SPLabel = ThresholdUI.SPLabel or Geyser.Label:new({
   name = "SPLabel",
-  x = 0, y = 0,
-  width = "100%", height = "100%",
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%",
   message = "SP"
 }, ThresholdUI.SPContainer)
 
@@ -74,28 +86,34 @@ ThresholdUI.SPLabel:echo(nil, "nocolor", nil)
 -- EP
 ThresholdUI.EPContainer = ThresholdUI.EPContainer or Geyser.Container:new({
   name = "EPContainer",
-  x = 30, y = 0,
-  width = "100%", height = "100%",
+  x = 30,
+  y = 0,
+  width = "100%",
+  height = "100%",
 }, ThresholdUI.VitalsBox);
 
 ThresholdUI.EPBar = ThresholdUI.EPBar or Geyser.Gauge:new({
   name = "EPBar",
-  x = 0, y = 0,
-  width = "100%", height = "100%"
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%"
 }, ThresholdUI.EPContainer)
 
 ThresholdUI.EPBar:setStyleSheet(
-    ThresholdUI.Styles.EPFrontNormal,
-    ThresholdUI.Styles.EPBack,
-    ThresholdUI.Styles.GaugeText
+  ThresholdUI.Styles.EPFrontNormal,
+  ThresholdUI.Styles.EPBack,
+  ThresholdUI.Styles.GaugeText
 )
 ThresholdUI.EPBar.text:setFontSize(ThresholdUI.metrics.gaugeFontSize)
 ThresholdUI.EPBar.text:echo(nil, "nocolor", nil)
 
 ThresholdUI.EPLabel = ThresholdUI.EPLabel or Geyser.Label:new({
   name = "EPLabel",
-  x = 0, y = 0,
-  width = "100%", height = "100%",
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%",
   message = "EP"
 }, ThresholdUI.EPContainer)
 
@@ -145,9 +163,9 @@ function ThresholdUI:Afflictions_Add()
   local aff = gmcp.Char.Afflictions.Add
 
   if aff[1] == "stun" or aff[1] == "immobile" then
-    self.HPBar.front:setStyleSheet(self.Styles.HPFrontStunned)
-    self.SPBar.front:setStyleSheet(self.Styles.SPFrontStunned)
-    self.EPBar.front:setStyleSheet(self.Styles.EPFrontStunned)
+    self.HPBar:setStyleSheet(self.Styles.HPFrontStunned)
+    self.SPBar:setStyleSheet(self.Styles.SPFrontStunned)
+    self.EPBar:setStyleSheet(self.Styles.EPFrontStunned)
   end
 end
 
@@ -155,8 +173,8 @@ function ThresholdUI:Afflictions_Remove()
   local aff = gmcp.Char.Afflictions.Remove
 
   if aff == "stun" or aff == "immobile" then
-    self.HPBar.front:setStyleSheet(self.Styles.HPFrontNormal)
-    self.SPBar.front:setStyleSheet(self.Styles.SPFrontNormal)
-    self.EPBar.front:setStyleSheet(self.Styles.EPFrontNormal)
+    self.HPBar:setStyleSheet(self.Styles.HPFrontNormal)
+    self.SPBar:setStyleSheet(self.Styles.SPFrontNormal)
+    self.EPBar:setStyleSheet(self.Styles.EPFrontNormal)
   end
 end

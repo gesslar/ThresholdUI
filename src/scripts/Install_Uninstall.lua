@@ -1,29 +1,30 @@
 ThresholdUI.SysHandlers = ThresholdUI.SysHandlers or {
-  {"sysInstall", f[[ThresholdUI:Install]]},
-  {"sysUninstall", f[[ThresholdUI:Uninstall]]},
+  { "sysInstall",   f [[ThresholdUI:Install]] },
+  { "sysUninstall", f [[ThresholdUI:Uninstall]] },
+  { "sysLoadEvent", f [[ThresholdUI:SysLoadEvent]] }
 }
 
 function ThresholdUI:Install(event, package)
   if package ~= self.AppName then return end
 
-  deleteNamedEventHandler(self.AppName, self.AppName..".sysInstall")
+  deleteNamedEventHandler(self.AppName, self.AppName .. ".sysInstall")
 
   self:ConnectionScript()
   cecho("Thank you for installing ThresholdUI!\nInitializing GMCP in Threshold.\n")
 
-  tempTimer(1, f[[send("gmcp reset", false)]])
+  tempTimer(1, f [[send("gmcp reset", false)]])
 end
 
 function ThresholdUI:Uninstall(event, package)
-    if package ~= self.AppName then return end
+  if package ~= self.AppName then return end
 
   setBorderTop(0)
   setBorderBottom(0)
   setBorderLeft(0)
   setBorderRight(0)
-  setBorderColor(0,0,0)
-  setBgColor(0,0,0)
-  setBackgroundColor(0,0,0)
+  setBorderColor(0, 0, 0)
+  setBgColor(0, 0, 0)
+  setBackgroundColor(0, 0, 0)
   self.MainContainer:hide()
   self.FeedbackBox:hide()
   deleteAllNamedTimers(self.AppName)
@@ -32,8 +33,16 @@ function ThresholdUI:Uninstall(event, package)
   cecho("<red>You have uninstalled ThresholdUI.\n")
 end
 
+function ThresholdUI:SysLoadEvent(_, notProfileReset)
+  if not notProfileReset then
+    self:ConnectionScript()
+
+    tempTimer(0.5, f [[send("gmcp reset", false)]])
+  end
+end
+
 for _, v in ipairs(ThresholdUI.SysHandlers) do
   local event, handler = v[1], v[2]
 
-  registerNamedEventHandler(ThresholdUI.AppName, ThresholdUI.AppName.."."..event, event, handler)
+  registerNamedEventHandler(ThresholdUI.AppName, ThresholdUI.AppName .. "." .. event, event, handler)
 end
