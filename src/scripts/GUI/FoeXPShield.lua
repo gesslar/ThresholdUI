@@ -8,14 +8,18 @@ ThresholdUI.OtherBox = ThresholdUI.OtherBox or Geyser.VBox:new({
 -- Foe
 ThresholdUI.FoeContainer = ThresholdUI.FoeContainer or Geyser.Container:new({
   name = "FoeContainer",
-  x = 0, y = 0,
-  height = "100%", width = "100%"
+  x = 0,
+  y = 0,
+  height = "100%",
+  width = "100%"
 }, ThresholdUI.OtherBox);
 
 ThresholdUI.FoeBar = ThresholdUI.FoeBar or Geyser.Gauge:new({
   name = "FoeBar",
-  x = 0, y = 0,
-  width = "100%", height = "100%"
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%"
 }, ThresholdUI.FoeContainer)
 
 ThresholdUI.FoeBar:setStyleSheet(
@@ -29,8 +33,10 @@ ThresholdUI.FoeBar.text:echo(nil, "nocolor", nil)
 
 ThresholdUI.FoeLabel = ThresholdUI.FoeLabel or Geyser.Label:new({
   name = "FoeLabel",
-  x = 0, y = 0,
-  width = "100%", height = "100%",
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%",
   message = "Foe"
 }, ThresholdUI.FoeContainer)
 
@@ -40,8 +46,10 @@ ThresholdUI.FoeLabel:echo(nil, "nocolor", nil)
 
 ThresholdUI.FoeFoeLabel = ThresholdUI.FoeFoeLabel or Geyser.Label:new({
   name = "FoeFoeLabel",
-  x = 0, y = 0,
-  width = "100%", height = "100%",
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%",
 }, ThresholdUI.FoeContainer)
 
 ThresholdUI.FoeFoeLabel:setStyleSheet(ThresholdUI.Styles.FoeFoeLabelStyle)
@@ -51,12 +59,18 @@ ThresholdUI.FoeFoeLabel:echo(nil, "nocolor", nil)
 -- XP
 ThresholdUI.XPContainer = ThresholdUI.XPContainer or Geyser.Container:new({
   name = "XPContainer",
-  x = 0, y = 0, height = "100%", width = "100%"
+  x = 0,
+  y = 0,
+  height = "100%",
+  width = "100%"
 }, ThresholdUI.OtherBox);
 
 ThresholdUI.XPBar = ThresholdUI.XPBar or Geyser.Gauge:new({
   name = "XPBar",
-  x = 0, y = 0, width = "100%", height = "100%"
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%"
 }, ThresholdUI.XPContainer)
 
 ThresholdUI.XPBar:setStyleSheet(
@@ -69,10 +83,12 @@ ThresholdUI.XPBar.text:echo(nil, "nocolor", nil)
 
 ThresholdUI.XPLabel = ThresholdUI.XPLabel or Geyser.Label:new({
   name = "XPLabel",
-  x = 0, y = 0,
-  width = "100%", height = "100%",
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%",
   message = "XP"
-},ThresholdUI.XPContainer)
+}, ThresholdUI.XPContainer)
 
 ThresholdUI.XPLabel:setStyleSheet(ThresholdUI.Styles.GaugeLabel)
 ThresholdUI.XPLabel:setFontSize(ThresholdUI.metrics.gaugeLabelFontSize)
@@ -81,14 +97,18 @@ ThresholdUI.XPLabel:echo(nil, "nocolor", nil)
 -- Shielding
 ThresholdUI.ShieldContainer = ThresholdUI.ShieldContainer or Geyser.Container:new({
   name = "ShieldContainer",
-  x = 0, y = 0,
-  width = "100%", height = "100%",
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%",
 }, ThresholdUI.OtherBox);
 
 ThresholdUI.ShieldBar = ThresholdUI.ShieldBar or Geyser.Gauge:new({
   name = "ShieldBar",
-  x = 0, y = 0,
-  width = "100%", height = "100%"
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%"
 }, ThresholdUI.ShieldContainer)
 
 ThresholdUI.ShieldBar:setStyleSheet(
@@ -102,8 +122,10 @@ ThresholdUI.ShieldBar.text:echo(nil, "nocolor", nil)
 
 ThresholdUI.ShieldLabel = ThresholdUI.ShieldLabel or Geyser.Label:new({
   name = "ShieldLabel",
-  x = 0, y = 0,
-  width = "100%", height = "100%",
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%",
   message = "Shielding"
 }, ThresholdUI.ShieldContainer)
 

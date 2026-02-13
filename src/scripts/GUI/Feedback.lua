@@ -1,9 +1,11 @@
 ThresholdUI.Feedback = ThresholdUI.Feedback or {}
-ThresholdUI.FeedbackLabels = {"shock", "net", "mastery", "gaze"}
+ThresholdUI.FeedbackLabels = { "shock", "net", "mastery", "gaze" }
 ThresholdUI.FeedbackBox = ThresholdUI.FeedbackBox or Geyser.HBox:new({
   name = "FeedbackContainer",
-  x = 0, y = -(ThresholdUI.metrics.height + ThresholdUI.metrics.inactiveHeight),
-  height = ThresholdUI.metrics.inactiveHeight, width = "100%",
+  x = 0,
+  y = -(ThresholdUI.metrics.height + ThresholdUI.metrics.inactiveHeight),
+  height = ThresholdUI.metrics.inactiveHeight,
+  width = "100%",
 })
 
 -- Create the labels for each feedback ability
@@ -34,7 +36,7 @@ function ThresholdUI:FeedbackToggle()
       setBorderBottom(self.metrics.height + self.metrics.inactiveHeight)
     end
 
-  -- Inactive bar is being shown
+    -- Inactive bar is being shown
   else
     self.FeedbackBox:hide()
   end

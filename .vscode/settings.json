@@ -6,5 +6,8 @@
   ],
   "Lua.diagnostics.disable": [
     "lowercase-global"
+  ],
+  "Lua.workspace.library": [
+    "/home/gesslar/.config/Code/User/globalStorage/delwing.mudlet-scripts-sdk\\docs"
   ]
 }

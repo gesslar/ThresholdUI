@@ -1,7 +1,7 @@
 -- Let's find out how big everything is!
 local numMeters = 4
-local metersBoxWidth = numMeters * (ThresholdUI.metrics.devotionDim.width)
-local DateTimeBgWidth = ThresholdUI.metrics.devotionDim.width * ThreshTime.config.longestDevotion
+local metersBoxWidth = numMeters * 10
+local DateTimeBgWidth = 10 * (ThreshTime.config.longestDevotion + 2)
 
 local RightBoxWidth = metersBoxWidth + DateTimeBgWidth
 
@@ -10,10 +10,6 @@ ThresholdUI.RightBox = ThresholdUI.RightBox or Geyser.HBox:new({
   width = RightBoxWidth,
   h_policy = Geyser.Fixed
 }, ThresholdUI.BarBox)
-
--- We need to know how wide to make the meters, since that box is going to be
--- statically sized and the time stuff will be auto.
-
 
 -- Meters
 ThresholdUI.MetersBox = ThresholdUI.MetersBox or Geyser.HBox:new({
@@ -39,10 +35,12 @@ ThresholdUI.CapacityBar:setStyleSheet(
 
 ThresholdUI.CapacityLabel = ThresholdUI.CapacityLabel or Geyser.Label:new({
   name = "CapacityLabel",
-  width = "100%", height = ThresholdUI.metrics.maxDim.height,
+  width = "100%",
+  height = 25,
   v_policy = Geyser.Fixed,
   message = "C",
-  font = ThresholdUI.Styles.MeterFontName, fontSize = ThresholdUI.metrics.meterFontSize,
+  font = ThresholdUI.Styles.MeterFontName,
+  fontSize = ThresholdUI.metrics.meterFontSize,
 }, ThresholdUI.CapacityBox)
 ThresholdUI.CapacityLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
 ThresholdUI.CapacityLabel:echo(nil, "nocolor", nil)
@@ -64,10 +62,12 @@ ThresholdUI.TummyBar:setStyleSheet(
 
 ThresholdUI.TummyLabel = ThresholdUI.TummyLabel or Geyser.Label:new({
   name = "TummyLabel",
-  width = "100%", height = ThresholdUI.metrics.maxDim.height,
+  width = "100%",
+  height = 25,
   v_policy = Geyser.Fixed,
   message = "T",
-  font = ThresholdUI.Styles.MeterFontName, fontSize = ThresholdUI.metrics.meterFontSize,
+  font = ThresholdUI.Styles.MeterFontName,
+  fontSize = ThresholdUI.metrics.meterFontSize,
 }, ThresholdUI.TummyBox)
 
 ThresholdUI.TummyLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
@@ -90,11 +90,13 @@ ThresholdUI.HealBankBar:setStyleSheet(
 
 ThresholdUI.HealBankLabel = ThresholdUI.HealBankLabel or Geyser.Label:new({
   name = "HealBankLabel",
-  width = "100%", height = ThresholdUI.metrics.maxDim.height,
+  width = "100%",
+  height = 25,
   v_policy = Geyser.Fixed,
   message = "H",
-  font = ThresholdUI.Styles.MeterFontName, fontSize = ThresholdUI.metrics.meterFontSize,
-},ThresholdUI.HealBankBox)
+  font = ThresholdUI.Styles.MeterFontName,
+  fontSize = ThresholdUI.metrics.meterFontSize,
+}, ThresholdUI.HealBankBox)
 
 ThresholdUI.HealBankLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
 ThresholdUI.HealBankLabel:echo(nil, "nocolor", nil)
@@ -116,10 +118,12 @@ ThresholdUI.HealTickBar:setStyleSheet(
 
 ThresholdUI.HealTickLabel = ThresholdUI.HealTickLabel or Geyser.Label:new({
   name = "HealTickLabel",
-  width = "100%", height = ThresholdUI.metrics.maxDim.height,
+  width = "100%",
+  height = 25,
   v_policy = Geyser.Fixed,
   message = "R",
-  font = ThresholdUI.Styles.MeterFontName, fontSize = ThresholdUI.metrics.meterFontSize,
+  font = ThresholdUI.Styles.MeterFontName,
+  fontSize = ThresholdUI.metrics.meterFontSize,
 }, ThresholdUI.HealTickBox)
 
 ThresholdUI.HealTickLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
@@ -167,7 +171,6 @@ function ThresholdUI:ToggleHealTick(event, arg, silent)
 
     self.Prefs.HealTick = true
     self:SavePrefs()
-
   elseif arg == "off" then
     self.HealTickBox:hide()
     self.MetersBox:remove(self.HealTickBox)
@@ -178,7 +181,6 @@ function ThresholdUI:ToggleHealTick(event, arg, silent)
     if silent ~= true then
       echo("Regen tick gauge disabled.\n")
     end
-
   else
     echo("Syntax: regen <on|off>\n")
   end
@@ -189,38 +191,45 @@ end
 -- Background label to prevent bleeding colours
 ThresholdUI.DateTimeBg = ThresholdUI.DateTimeBg or Geyser.Label:new({
   name = "DateTimeBg",
-  width = DateTimeBgWidth, height = ThresholdUI.metrics.height,
+  width = DateTimeBgWidth,
+  height = ThresholdUI.metrics.height,
   h_policy = Geyser.Fixed,
   stylesheet = ThresholdUI.Styles.DateTimeLabel
 }, ThresholdUI.RightBox)
 
 ThresholdUI.DateTimeBox = ThresholdUI.DateTimeBox or Geyser.VBox:new({
   name = "TimeBox",
-  x = 0, y = 0,
-  width = "100%", height = "100%"
+  x = 0,
+  y = 0,
+  width = "100%",
+  height = "100%"
 }, ThresholdUI.DateTimeBg)
 
 ThresholdUI.DateLabel = ThresholdUI.DateLabel or Geyser.Label:new({
   name = "DateLabel",
-  font = ThresholdUI.Styles.DateTimeFont, fontSize = ThresholdUI.metrics.dateFontSize,
+  font = ThresholdUI.Styles.DateTimeFont,
+  fontSize = ThresholdUI.metrics.dateFontSize,
   stylesheet = ThresholdUI.Styles.DateTimeLabel
 }, ThresholdUI.DateTimeBox)
 
 ThresholdUI.DayLabel = ThresholdUI.DayLabel or Geyser.Label:new({
   name = "DayLabel",
-  font = ThresholdUI.Styles.DateTimeFont, fontSize = ThresholdUI.metrics.dayFontSize,
+  font = ThresholdUI.Styles.DateTimeFont,
+  fontSize = ThresholdUI.metrics.dayFontSize,
   stylesheet = ThresholdUI.Styles.DateTimeLabel
 }, ThresholdUI.DateTimeBox)
 
 ThresholdUI.TimeLabel = ThresholdUI.TimeLabel or Geyser.Label:new({
   name = "TimeLabel",
-  font = ThresholdUI.Styles.DateTimeFont, fontSize = ThresholdUI.metrics.hourFontSize,
+  font = ThresholdUI.Styles.DateTimeFont,
+  fontSize = ThresholdUI.metrics.hourFontSize,
   stylesheet = ThresholdUI.Styles.DateTimeLabel
 }, ThresholdUI.DateTimeBox)
 
 ThresholdUI.Devotion = ThresholdUI.Devotion or Geyser.Label:new({
   name = "DevotionLabel",
-  font = ThresholdUI.Styles.DateTimeFont, fontSize = ThresholdUI.metrics.devotionFontSize,
+  font = ThresholdUI.Styles.DateTimeFont,
+  fontSize = ThresholdUI.metrics.devotionFontSize,
   stylesheet = ThresholdUI.Styles.DateTimeLabel
 }, ThresholdUI.DateTimeBox)
 
@@ -235,12 +244,11 @@ function ThresholdUI:ToggleTimeBox(event, arg, silent)
     self:startTime()
 
     if silent ~= true then
-        echo("Time box enabled.\n")
+      echo("Time box enabled.\n")
     end
 
     self.Prefs.TimeBox = true
     self:SavePrefs()
-
   elseif arg == "off" then
     self.DateTimeBg:hide()
     self.RightBox:remove(self.DateTimeBg)
@@ -253,9 +261,8 @@ function ThresholdUI:ToggleTimeBox(event, arg, silent)
     self:SavePrefs()
 
     if silent ~= true then
-        echo("Time box disabled.\n")
+      echo("Time box disabled.\n")
     end
-
   else
     echo("Syntax: timebox <on|off>\n")
   end
@@ -286,7 +293,7 @@ function ThresholdUI:refreshTime()
     suffix = "rd"
   end
 
-  timemess = f"{timeAsString}{suffix} toll"
+  timemess = f "{timeAsString}{suffix} toll"
   self.DateLabel:echo(datemess, "nocolor", nil)
   self.DayLabel:echo(datetime.weekday, "nocolor", nil)
   self.TimeLabel:echo(timemess, "nocolor", nil)

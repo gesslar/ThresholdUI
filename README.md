@@ -1,46 +1,69 @@
 # ThresholdUI
 
-ThresholdUI is a lightweight, scriptable graphical user interface package for Mudlet (a MUD client). It provides a set of Lua scripts, GUI components, and packaged builds to add customizable HUD and meter features to your Mudlet profile.
-
-## Key features
-
-- Modular Lua-based GUI components (see `src/scripts/GUI/`)
-- Timers, styles, and event handlers for in-game thresholds and meters
-- Packaged build in `build/ThresholdUI.mpackage` for easy import into Mudlet
-
-## Repository layout
-
-- `src/` - source Lua scripts and supporting assets used during development
-  - `scripts/` - core scripts (connection, event handlers, timers, styles)
-  - `scripts/GUI/` - GUI components and containers loaded by the scripts
-  - `aliases/` - example aliases and helper scripts
-  - `resources/` - bundled assets such as images and preference defaults
-- `package.json` - project metadata; may include build/tooling configuration
-- `mfile` - Mudlet package manifest used when exporting
-
-> **Note:** Historical references to `build/`, `tmp/`, or `filtered/` directories refer to paths that are generated during packaging and are not checked into the repository. Packaging tools will create them when you run the export workflow.
+A dark-themed, gold-accented HUD for Threshold RPG in Mudlet that displays your vitals, combat info, progression, and game clock in a persistent bottom-of-screen bar.
 
 ## Installation
 
-1. Import a packaged release: open Mudlet and import the generated `ThresholdUI.mpackage` or `ThresholdUI.xml` (produced by the export workflow in the `build/` directory).
-2. Alternatively, copy the relevant `src/` Lua files into your Mudlet profile's scripts directory.
+In Threshold, type `gmcp gui` to install fresh or update to the latest version.
 
-After installing, restart Mudlet or reload your profile to ensure scripts initialize correctly.
+## Features Overview
 
-## Development
+### Vitals Gauges
 
-- Edit source files in `src/`. The primary entry points are in `src/scripts/` and `src/scripts/GUI/`.
-- When exporting a package, Mudlet (or related tooling) will create a `build/` directory containing distributable `.mpackage` and `.xml` files.
-- If your workflow uses temporary testing outputs, keep them outside the repository or ensure they are ignored via tooling configuration.
+Three horizontal bars on the left side showing your current and maximum values for:
 
-## Contributing
+- **HP** (Hit Points) - red
+- **SP** (Spell Points) - blue
+- **EP** (Endurance Points) - teal
 
-Contributions are welcome. Open issues or pull requests with a clear description of changes. When submitting code, prefer small focused commits and include brief tests or usage notes when relevant.
+When you are stunned or immobilized, all three bars dim to give you an immediate visual cue.
 
-## License
+### Combat, XP, and Shielding
 
-This repository is released into the public domain under the Unlicense. See `UNLICENSE.txt` for the full text.
+Three horizontal bars in the center showing:
 
----
+- **Foe** - your current enemy's health percentage with their name displayed on the bar; also shows who the enemy is targeting if it isn't you
+- **XP** - your experience progress to the next level as a percentage
+- **Shield** - your magical shielding percentage; this bar only appears when shielding is active and hides when it is not
 
-If anything in this README is unclear or you want help importing the package into Mudlet, open an issue with details about your Mudlet version and what you tried.
+### Vertical Meters
+
+Four thin vertical meters on the right side:
+
+- **C** (Capacity) - how full your inventory is
+- **T** (Tummy) - your hunger/fullness level
+- **H** (HealBank) - your stored healing reserves
+- **R** (Regen) - progress toward your next healing tick (can be toggled on/off)
+
+### In-Game Date and Time
+
+A small panel showing the in-game calendar clock, updated every second:
+
+- Date (month/day/year)
+- Day of the week (e.g. Coronea, Solus, Lunas)
+- Time as an ordinal toll (e.g. "14th toll")
+- Current devotion period
+
+This panel can be toggled on/off.
+
+### Inactive Timer
+
+When you are resting, trancing, or meditating, a bar appears above the HUD showing how long you have been inactive (e.g. "You have been Trancing for 5m 32s") with a subtle breathing background animation.
+
+### Psion Feedback
+
+For psion players, a row of four indicators appears above the HUD showing the state of your feedback abilities: **shock**, **net**, **mastery**, and **gaze**. Each indicator lights up in gold when that ability has feedback and stays dim when it does not. This bar only appears when the game sends feedback data and is hidden while the inactive timer is shown.
+
+## Useful Commands (Aliases)
+
+ThresholdUI provides several aliases (commands) you can type in Mudlet to control the UI:
+
+- **Toggle Heal Tick Gauge**
+  - Type: `regen on` or `regen off`
+  - Shows or hides the healing tick gauge.
+
+- **Toggle Date Time Box**
+  - Type: `datetime on` or `datetime off`
+  - Displays or hides the in-game date and time box.
+
+Enjoy your adventures with ThresholdUI!
