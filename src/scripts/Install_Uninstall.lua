@@ -1,6 +1,7 @@
 ThresholdUI.SysHandlers = ThresholdUI.SysHandlers or {
   {"sysInstall", f[[ThresholdUI:Install]]},
   {"sysUninstall", f[[ThresholdUI:Uninstall]]},
+  {"sysLoadEvent", f[[ThresholdUI:SysLoadEvent]]},
 }
 
 function ThresholdUI:Install(event, package)
@@ -30,6 +31,14 @@ function ThresholdUI:Uninstall(event, package)
   deleteAllNamedEventHandlers(self.AppName)
   ThresholdUI = {}
   cecho("<red>You have uninstalled ThresholdUI.\n")
+end
+
+function ThresholdUI:SysLoadEvent(_, notProfileReset)
+  if not notProfileReset then
+    self:ConnectionScript()
+
+    tempTimer(0.5, f[[send("gmcp reset", false)]])
+  end
 end
 
 for _, v in ipairs(ThresholdUI.SysHandlers) do
