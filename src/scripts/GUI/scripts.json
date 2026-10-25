@@ -40,11 +40,5 @@
     "isFolder": "no",
     "name": "MetersTime",
     "script": ""
-  },
-  {
-    "isActive": "yes",
-    "isFolder": "no",
-    "name": "SettleDown",
-    "script": ""
   }
 ]
