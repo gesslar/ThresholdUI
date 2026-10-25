@@ -4,8 +4,12 @@
   "description": "The main Threshold Graphical User Interface package for Mudlet",
   "main": "index.js",
   "scripts": {
-    "build": "/home/gesslar/bin/muddle-shadow-1.1.0/bin/muddle",
-    "watch": "/home/gesslar/bin/muddle-shadow-1.1.0/bin/muddle -w",
+    "build": "npx -y muddy",
+    "watch": "npx -y muddy -w",
+    "major": "npx -y muddy version major --package && npm i",
+    "minor": "npx -y muddy version minor --package && npm i",
+    "patch": "npx -y muddy version patch --package && npm i",
+    "update": "npx -y npm-check-updates -u && npm install",
     "pr": "gt submit --publish --restack --ai"
   },
   "repository": {
@@ -13,7 +17,7 @@
     "url": "git+https://github.com/gesslar/ThresholdUI.git"
   },
   "author": "",
-  "license": "Unlicense",
+  "license": "0BSD",
   "bugs": {
     "url": "https://github.com/gesslar/ThresholdUI/issues"
   },
