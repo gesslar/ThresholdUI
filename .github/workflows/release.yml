@@ -9,3 +9,5 @@ jobs:
     uses: gesslar/Maint/.github/workflows/ReleaseMuddyInjectMupdate.yaml@main
     permissions:
       contents: write
+    with:
+      quality_check: ""
