@@ -145,9 +145,9 @@ function ThresholdUI:Afflictions_Add()
   local aff = gmcp.Char.Afflictions.Add
 
   if aff[1] == "stun" or aff[1] == "immobile" then
-    self.HPBar.front:setStyleSheet(self.Styles.HPFrontStunned)
-    self.SPBar.front:setStyleSheet(self.Styles.SPFrontStunned)
-    self.EPBar.front:setStyleSheet(self.Styles.EPFrontStunned)
+    self.HPBar:setStyleSheet(self.Styles.HPFrontStunned, self.Styles.HPBack, self.Styles.GaugeText)
+    self.SPBar:setStyleSheet(self.Styles.SPFrontStunned, self.Styles.SPBack, self.Styles.GaugeText)
+    self.EPBar:setStyleSheet(self.Styles.EPFrontStunned, self.Styles.EPBack, self.Styles.GaugeText)
   end
 end
 
@@ -155,8 +155,8 @@ function ThresholdUI:Afflictions_Remove()
   local aff = gmcp.Char.Afflictions.Remove
 
   if aff == "stun" or aff == "immobile" then
-    self.HPBar.front:setStyleSheet(self.Styles.HPFrontNormal)
-    self.SPBar.front:setStyleSheet(self.Styles.SPFrontNormal)
-    self.EPBar.front:setStyleSheet(self.Styles.EPFrontNormal)
+    self.HPBar:setStyleSheet(self.Styles.HPFrontNormal, self.Styles.HPBack, self.Styles.GaugeText)
+    self.SPBar:setStyleSheet(self.Styles.SPFrontNormal, self.Styles.SPBack, self.Styles.GaugeText)
+    self.EPBar:setStyleSheet(self.Styles.EPFrontNormal, self.Styles.EPBack, self.Styles.GaugeText)
   end
 end

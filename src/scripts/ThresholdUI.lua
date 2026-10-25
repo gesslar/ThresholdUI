@@ -7,8 +7,18 @@ ThresholdUI.AppName = ThresholdUI.AppName or "ThresholdUI"
 -- Threshold App Directory
 ThresholdUI.AppDir = f "{getMudletHomeDir()}/{ThresholdUI.AppName}"
 
--- Prefs
-ThresholdUI.PrefsFile = f "{ThresholdUI.AppDir}/prefs.lua"
+-- Glu
+ThresholdUI.glu = ThresholdUI.glu or
+    require(ThresholdUI.AppName .. "/vendor/Glu-single")(ThresholdUI.AppName)
+
+local glu = ThresholdUI.glu
+
+-- Prefs (stored in the profile directory so they survive reinstalls)
+ThresholdUI.PrefsFile = f "{ThresholdUI.AppName}.Preferences.lua"
+ThresholdUI.PrefsDefaults = {
+  HealTick = true,
+  TimeBox = true,
+}
 ThresholdUI.Prefs = ThresholdUI.Prefs or {}
 
 -- Assets directory
@@ -45,14 +55,6 @@ ThresholdUI.metrics = {
   devotionFontSize = 12,
 }
 
-local function round(num)
-  if num >= 0 then
-    return math.floor(num + 0.5)
-  else
-    return math.ceil(num - 0.5)
-  end
-end
-
 -- Bar updater
 function ThresholdUI:SetBarValue(bar, curr, max, text)
   local curr_value
@@ -64,7 +66,11 @@ function ThresholdUI:SetBarValue(bar, curr, max, text)
     curr_value = curr
   end
 
-  bar_value = round(curr_value * 100 / max)
+  if max == nil or max <= 0 then
+    bar_value = 0
+  else
+    bar_value = glu.number.round(curr_value * 100 / max)
+  end
   bar_max = 100
 
   if bar_value < 5 then
@@ -78,15 +84,9 @@ function ThresholdUI:SetBarValue(bar, curr, max, text)
 end
 
 function ThresholdUI:LoadPrefs()
-  if io.open(self.PrefsFile) ~= nil then
-    table.load(self.PrefsFile, self.Prefs)
-  end
+  self.Prefs = glu.preferences.load(nil, self.PrefsFile, self.PrefsDefaults)
 end
 
 function ThresholdUI:SavePrefs()
-  table.save(self.PrefsFile, self.Prefs)
-end
-
-function Capitalize(str)
-  return (str:gsub("^%l", string.upper))
+  glu.preferences.save(nil, self.PrefsFile, self.Prefs)
 end

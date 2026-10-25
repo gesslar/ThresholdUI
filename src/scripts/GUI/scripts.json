@@ -2,6 +2,12 @@
   {
     "isActive": "yes",
     "isFolder": "no",
+    "name": "Main Container",
+    "script": ""
+  },
+  {
+    "isActive": "yes",
+    "isFolder": "no",
     "name": "Inactive Container",
     "script": ""
   },
@@ -9,12 +15,6 @@
     "isActive": "yes",
     "isFolder": "no",
     "name": "Feedback",
-    "script": ""
-  },
-  {
-    "isActive": "yes",
-    "isFolder": "no",
-    "name": "Main Container",
     "script": ""
   },
   {

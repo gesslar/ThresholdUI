@@ -20,21 +20,20 @@ ThresholdUI.InactiveStart = nil
 ThresholdUI.InactiveType = ""
 ThresholdUI.InactivePhase = 0  -- Start at black
 ThresholdUI.BreathSpeed = 0.02
-ThresholdUI.BrightColor = {r = 18, g = 22, b = 25}  -- Previously the middle color, now the brightest
+ThresholdUI.DarkColor = {0, 0, 0}
+ThresholdUI.BrightColor = {18, 22, 25}  -- Previously the middle color, now the brightest
 
 function ThresholdUI:UpdateInactiveGradient()
   local style = ThresholdUI.Styles.InactiveLabel
 
   local t = math.sin(self.InactivePhase) * 0.5 + 0.5  -- Oscillate between 0 and 1
 
-  -- Interpolate between black and bright color
-  local r = math.floor(self.BrightColor.r * t)
-  local g = math.floor(self.BrightColor.g * t)
-  local b = math.floor(self.BrightColor.b * t)
+  -- Interpolate between dark and bright color (the sine already eases it)
+  local rgb = self.glu.colour.interpolate(self.DarkColor, self.BrightColor, t * 100, "linear")
 
   local backgroundColor = string.format([[
     background-color: rgb(%d,%d,%d);
-  ]], r, g, b)
+  ]], rgb[1], rgb[2], rgb[3])
 
   self.InactiveLabel:setStyleSheet(style .. backgroundColor)
 
@@ -45,38 +44,8 @@ function ThresholdUI:UpdateInactiveGradient()
   end
 end
 
-function ThresholdUI:FormatDuration(duration)
-  if duration < 1 then return "0s" end
-  local days = math.floor(duration / 86400)
-  local remaining = duration % 86400
-  local hours = math.floor(remaining / 3600)
-  remaining = remaining % 3600
-  local minutes = math.floor(remaining / 60)
-  remaining = remaining % 60
-  local seconds = remaining
-  local answer
-
-  if days > 0 then
-    answer = f"{answer or \"\"}{days}d "
-  end
-
-  if hours > 0 then
-    answer = f"{answer or \"\"}{hours}h "
-  end
-
-  if minutes > 0 then
-    answer = f"{answer or \"\"}{minutes}m "
-  end
-
-  if seconds > 0 then
-    answer = f"{answer or \"\"}{seconds}s"
-  end
-
-  return answer
-end
-
 function ThresholdUI:UpdateInactiveDisplay()
-  local InactiveMess = self:FormatDuration(os.time() - self.InactiveStart)
+  local InactiveMess = self.glu.date.shms(os.time() - self.InactiveStart, true)
   local output = f("You have been {self.InactiveType} for {InactiveMess}")
 
   self.InactiveLabel:echo(output)
