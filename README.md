@@ -1,42 +1,42 @@
 # ThresholdUI
 
-ThresholdUI is a lightweight, scriptable graphical user interface package for Mudlet (a MUD client). It provides a set of Lua scripts, GUI components, and packaged builds to add customizable HUD and meter features to your Mudlet profile.
+A graphical interface for [Threshold RPG](https://www.thresholdrpg.com/) in Mudlet. It adds a status bar along the bottom of your screen that keeps your vitals, combat, and the game clock in view, all driven live by GMCP.
 
-## Key features
+## What you get
 
-- Modular Lua-based GUI components (see `src/scripts/GUI/`)
-- Timers, styles, and event handlers for in-game thresholds and meters
-- Packaged build in `build/ThresholdUI.mpackage` for easy import into Mudlet
-
-## Repository layout
-
-- `src/` - source Lua scripts and supporting assets used during development
-  - `scripts/` - core scripts (connection, event handlers, timers, styles)
-  - `scripts/GUI/` - GUI components and containers loaded by the scripts
-  - `aliases/` - example aliases and helper scripts
-  - `resources/` - bundled assets such as images and the vendored [Glu](https://github.com/gesslar/Glu) library
-- `package.json` - project metadata; may include build/tooling configuration
-- `mfile` - Mudlet package manifest used when exporting
-
-> **Note:** Historical references to `build/`, `tmp/`, or `filtered/` directories refer to paths that are generated during packaging and are not checked into the repository. Packaging tools will create them when you run the export workflow.
+- **Vitals** — HP, SP, and EP gauges. They dim while you're stunned or immobile.
+- **Combat** — your foe's name and health, and who your foe is fighting.
+- **Experience and shielding** — progress to your next level, plus a shielding gauge that appears only when you have shields up.
+- **Meters** — capacity (C), tummy (T), heal bank (H), and regen tick (R).
+- **Game clock** — the date, weekday, toll of the day, and current devotion on Threshold's calendar.
+- **Rest timer** — a gently pulsing bar showing how long you've been resting, meditating, or trancing.
+- **Psion feedback** — shock, net, mastery, and gaze indicators, shown only for characters that have them.
 
 ## Installation
 
-1. Import a packaged release: open Mudlet and import the generated `ThresholdUI.mpackage` or `ThresholdUI.xml` (produced by the export workflow in the `build/` directory).
-2. Alternatively, copy the relevant `src/` Lua files into your Mudlet profile's scripts directory.
+### Primary
 
-After installing, restart Mudlet or reload your profile to ensure scripts initialize correctly.
+If you're logged in to Threshold:
 
-## Development
+1. Ensure that you hav GMCP enabled: `gmcp on`
+2. Install the GUI: `gmcp gui`
 
-- Edit source files in `src/`. The primary entry points are in `src/scripts/` and `src/scripts/GUI/`.
-- When exporting a package, Mudlet (or related tooling) will create a `build/` directory containing distributable `.mpackage` and `.xml` files.
-- If your workflow uses temporary testing outputs, keep them outside the repository or ensure they are ignored via tooling configuration.
+### Alternative
 
-## Contributing
+1. Download `ThresholdUI.mpackage` from the [latest release](https://github.com/gesslar/ThresholdUI/releases/latest).
+2. In Mudlet, open **Package Manager** and install the downloaded file.
 
-Contributions are welcome. Open issues or pull requests with a clear description of changes. When submitting code, prefer small focused commits and include brief tests or usage notes when relevant.
+ThresholdUI sets up GMCP with Threshold for you as soon as it's installed.
+
+## Commands
+
+| Command | What it does |
+| --- | --- |
+| `regen on` / `regen off` | Show or hide the regen tick meter. |
+| `datetime on` / `datetime off` | Show or hide the game clock. |
+
+Your choices are remembered between sessions and reinstalls.
 
 ## License
 
-This repository is released under the [Zero-Clause BSD license](https://opensource.org/license/0bsd) (0BSD).
+ThresholdUI is released under the [0BSD](https://opensource.org/license/0bsd).
