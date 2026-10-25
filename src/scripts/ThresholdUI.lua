@@ -5,14 +5,14 @@ ThresholdUI = ThresholdUI or {}
 ThresholdUI.AppName = ThresholdUI.AppName or "ThresholdUI"
 
 -- Threshold App Directory
-ThresholdUI.AppDir = f"{getMudletHomeDir()}/{ThresholdUI.AppName}"
+ThresholdUI.AppDir = f "{getMudletHomeDir()}/{ThresholdUI.AppName}"
 
 -- Prefs
-ThresholdUI.PrefsFile = f"{ThresholdUI.AppDir}/prefs.lua"
+ThresholdUI.PrefsFile = f "{ThresholdUI.AppDir}/prefs.lua"
 ThresholdUI.Prefs = ThresholdUI.Prefs or {}
 
 -- Assets directory
-ThresholdUI.AssetsPath = f"{ThresholdUI.AppDir}/assets"
+ThresholdUI.AssetsPath = f "{ThresholdUI.AppDir}/assets"
 
 -- Enable these GMCP modules
 ThresholdUI.enableModules = { "Char", "Core", "External" }
@@ -58,8 +58,10 @@ function ThresholdUI:SetBarValue(bar, curr, max, text)
   local curr_value
   local bar_value, bar_max
 
-  if curr < 0 then curr_value = 0
-  else curr_value = curr
+  if curr < 0 then
+    curr_value = 0
+  else
+    curr_value = curr
   end
 
   bar_value = round(curr_value * 100 / max)
@@ -69,9 +71,9 @@ function ThresholdUI:SetBarValue(bar, curr, max, text)
     bar_value = 0
   end
   if text ~= nil then
-    bar:setValue(bar_value, bar_max, f"{text}")
+    bar:setValue(bar_value, bar_max, f "{text}")
   else
-    bar:setValue(bar_value, bar_max, f"{curr}/{max}")
+    bar:setValue(bar_value, bar_max, f "{curr}/{max}")
   end
 end
 
