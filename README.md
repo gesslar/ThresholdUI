@@ -14,7 +14,7 @@ ThresholdUI is a lightweight, scriptable graphical user interface package for Mu
   - `scripts/` - core scripts (connection, event handlers, timers, styles)
   - `scripts/GUI/` - GUI components and containers loaded by the scripts
   - `aliases/` - example aliases and helper scripts
-  - `resources/` - bundled assets such as images and preference defaults
+  - `resources/` - bundled assets such as images and the vendored [Glu](https://github.com/gesslar/Glu) library
 - `package.json` - project metadata; may include build/tooling configuration
 - `mfile` - Mudlet package manifest used when exporting
 
@@ -39,8 +39,4 @@ Contributions are welcome. Open issues or pull requests with a clear description
 
 ## License
 
-This repository is released into the public domain under the Unlicense. See `UNLICENSE.txt` for the full text.
-
----
-
-If anything in this README is unclear or you want help importing the package into Mudlet, open an issue with details about your Mudlet version and what you tried.
+This repository is released under the [Zero-Clause BSD license](https://opensource.org/license/0bsd) (0BSD).

@@ -1,14 +1,16 @@
+local glu = ThresholdUI.glu
+
 ThresholdUI.Feedback = ThresholdUI.Feedback or {}
 ThresholdUI.FeedbackLabels = {"shock", "net", "mastery", "gaze"}
 ThresholdUI.FeedbackBox = ThresholdUI.FeedbackBox or Geyser.HBox:new({
   name = "FeedbackContainer",
-  x = 0, y = -(ThresholdUI.metrics.height + ThresholdUI.metrics.inactiveHeight),
+  x = 0, y = -(ThresholdUI.metrics.height + ThresholdUI.metrics.inactiveHeight)+2,
   height = ThresholdUI.metrics.inactiveHeight, width = "100%",
 })
 
 -- Create the labels for each feedback ability
 for _, v in ipairs(ThresholdUI.FeedbackLabels) do
-  local label = "Feedback_" .. Capitalize(v)
+  local label = "Feedback_" .. glu.string.capitalize(v)
   ThresholdUI[label] = ThresholdUI[label] or Geyser.Label:new({
     name = label,
     message = f([[<center>{v}</center>]])
@@ -24,8 +26,8 @@ ThresholdUI.FeedbackBox:hide()
 function ThresholdUI:FeedbackToggle()
   -- Inactive bar is not being shown
   if self.InactiveContainer.hidden then
-    -- We have no feedback: hide
-    if not gmcp.Char or not gmcp.Char.Feedback or not #gmcp.Char.Feedback then
+    -- We have no feedback (not a psion): hide
+    if not gmcp.Char or not gmcp.Char.Feedback then
       self.FeedbackBox:hide()
       setBorderBottom(self.metrics.height)
       -- We have feedback: show
@@ -48,15 +50,9 @@ function ThresholdUI:UpdateFeedback()
   end
 
   for _, v in ipairs(self.FeedbackLabels) do
-    local label = "Feedback_" .. Capitalize(v)
-    local found = false
-    for _, feedback in ipairs(gmcp.Char.Feedback) do
-      if v == feedback then
-        found = true
-      end
-    end
+    local label = "Feedback_" .. glu.string.capitalize(v)
 
-    if found == true then
+    if glu.table.includes(gmcp.Char.Feedback, v) then
       self[label]:setStyleSheet(self.Styles.FeedbackActive)
     else
       self[label]:setStyleSheet(self.Styles.FeedbackInactive)
