@@ -3,14 +3,14 @@
     "isActive": "yes",
     "isFolder": "no",
     "name": "Toggle Heal Tick Gauge",
-    "regex": "^regen (\\w+)$",
+    "regex": "^/regen (\\w+)$",
     "script": ""
   },
   {
     "isActive": "yes",
     "isFolder": "no",
     "name": "Toggle Date Time Box",
-    "regex": "^datetime (\\w+)$",
+    "regex": "^/datetime (\\w+)$",
     "script": ""
   }
 ]
