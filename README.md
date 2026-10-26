@@ -14,14 +14,14 @@ A graphical interface for [Threshold RPG](https://www.thresholdrpg.com/) in Mudl
 
 ## Installation
 
-### Primary
+## Primary
 
 If you're logged in to Threshold:
 
 1. Ensure that you hav GMCP enabled: `gmcp on`
 2. Install the GUI: `gmcp gui`
 
-### Alternative
+## Alternative
 
 1. Download `ThresholdUI.mpackage` from the [latest release](https://github.com/gesslar/ThresholdUI/releases/latest).
 2. In Mudlet, open **Package Manager** and install the downloaded file.
