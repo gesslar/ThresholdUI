@@ -19,6 +19,7 @@
     ],
     "ignoreDir": [
       "Glu-single.lua"
-    ]
+    ],
+    "useGitIgnore": true
   }
 }
