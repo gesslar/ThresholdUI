@@ -3,16 +3,22 @@
     "version": "Lua 5.1"
   },
   "diagnostics": {
-    "ignoredFiles": "Disable"
+    "ignoredFiles": "Disable",
+    "globals": [
+      "gmod",
+      "mudlet"
+    ],
+    "disable": [
+      "lowercase-global"
+    ]
   },
   "workspace": {
     "library": [
-      "$HOME/.config/Code/User/globalStorage/delwing.mudlet-scripts-sdk\\docs",
+      "$HOME/.config/Code/User/globalStorage/delwing.mudlet-scripts-sdk/docs",
       "node_modules/@gesslar/glu/build/library"
     ],
     "ignoreDir": [
-      "Glu-single.lua",
-      "MudletDocs"
+      "Glu-single.lua"
     ]
   }
 }
