@@ -14,12 +14,13 @@ A graphical interface for [Threshold RPG](https://www.thresholdrpg.com/) in Mudl
 
 ## Installation
 
+Ensure that you hav GMCP enabled: `gmcp on`
+
 ### Primary
 
 If you're logged in to Threshold:
 
-1. Ensure that you hav GMCP enabled: `gmcp on`
-2. Install the GUI: `gmcp gui`
+1. Install the GUI: `gmcp gui`
 
 ### Alternative
 
