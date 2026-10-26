@@ -33,8 +33,8 @@ ThresholdUI sets up GMCP with Threshold for you as soon as it's installed.
 
 | Command | What it does |
 | --- | --- |
-| `/regen on` / `regen off` | Show or hide the regen tick meter. |
-| `/datetime on` / `datetime off` | Show or hide the game clock. |
+| `/regen on` / `/regen off` | Show or hide the regen tick meter. |
+| `/datetime on` / `/datetime off` | Show or hide the game clock. |
 
 Your choices are remembered between sessions and reinstalls.
 
