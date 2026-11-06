@@ -1,11 +1,11 @@
--- Adjust the dimensions based on the font and font sizes used in the UI
-ThresholdUI:AdjustFontMetrics()
-
--- Set the new height
-ThresholdUI.metrics.height = ThresholdUI.metrics.maxDim.height * 3
+-- Work out how big everything is from the font size preference
+ThresholdUI:ComputeMetrics()
 
 -- Now that we know our height, BAM! SET THE THINGS!
 setBorderBottom(ThresholdUI.metrics.height)
+
+-- Drop the input line's frame so it sits flush under the bar
+setCmdLineStyleSheet("main", ThresholdUI.Styles.CommandLine)
 
 ThresholdUI.MainContainer = ThresholdUI.MainContainer or Geyser.Label:new({
   name = "MainContainer",

@@ -1,24 +1,14 @@
--- Let's find out how big everything is!
-local numMeters = 4
-local metersBoxWidth = numMeters * (ThresholdUI.metrics.devotionDim.width)
-local DateTimeBgWidth = ThresholdUI.metrics.devotionDim.width * ThreshTime.config.longestDevotion
-
-local RightBoxWidth = metersBoxWidth + DateTimeBgWidth
-
+-- Meters and clock, sized from ThresholdUI:ComputeMetrics
 ThresholdUI.RightBox = ThresholdUI.RightBox or Geyser.HBox:new({
   name = "RightBox",
-  width = RightBoxWidth,
+  width = ThresholdUI.metrics.metersWidth + ThresholdUI.metrics.dateTimeWidth,
   h_policy = Geyser.Fixed
 }, ThresholdUI.BarBox)
-
--- We need to know how wide to make the meters, since that box is going to be
--- statically sized and the time stuff will be auto.
-
 
 -- Meters
 ThresholdUI.MetersBox = ThresholdUI.MetersBox or Geyser.HBox:new({
   name = "MetersBox",
-  width = metersBoxWidth,
+  width = ThresholdUI.metrics.metersWidth,
   h_policy = Geyser.Fixed
 }, ThresholdUI.RightBox)
 
@@ -126,34 +116,45 @@ ThresholdUI.HealTickLabel:setStyleSheet(ThresholdUI.Styles.MeterLabel)
 ThresholdUI.HealTickLabel:echo(nil, "nocolor", nil)
 
 function ThresholdUI:UpdateCapacity()
-  if gmcp.Char.Status.capacity == nil then return end
-  if gmcp.Char.Status.max_capacity == nil then return end
+  local capacity = self:StatusNumber("capacity")
+  local max_capacity = self:StatusNumber("max_capacity")
+  if capacity == nil or max_capacity == nil or max_capacity <= 0 then return end
 
-  self.CapacityBar:setValue(
-    tonumber(gmcp.Char.Status.max_capacity) - tonumber(gmcp.Char.Status.capacity),
-    tonumber(gmcp.Char.Status.max_capacity)
-  )
+  self.CapacityBar:setValue(max_capacity - capacity, max_capacity)
 end
 
 function ThresholdUI:UpdateTummy()
-  if gmcp.Char.Status.tummy == nil then return end
+  local tummy = self:StatusNumber("tummy")
+  if tummy == nil then return end
 
-  self.TummyBar:setValue(tonumber(gmcp.Char.Status.tummy), 100)
+  self.TummyBar:setValue(tummy, 100)
 end
 
 function ThresholdUI:UpdateHealBank()
-  if gmcp.Char.Status.hb == nil then return end
+  local hb = self:StatusNumber("hb")
+  if hb == nil then return end
 
-  self.HealBankBar:setValue(tonumber(gmcp.Char.Status.hb), 100)
+  self.HealBankBar:setValue(hb, 100)
 end
 
 function ThresholdUI:UpdateHealTick()
-  if gmcp.Char.Status.heal_tick == nil then return end
+  local heal_tick = gmcp.Char.Status.heal_tick
+  if type(heal_tick) ~= "table" then return end
 
-  local current = gmcp.Char.Status.heal_tick[1]
-  local max = gmcp.Char.Status.heal_tick[2]
+  local current = tonumber(heal_tick[1])
+  local max = tonumber(heal_tick[2])
+  if current == nil or max == nil or max <= 1 then return end
 
   self.HealTickBar:setValue(current - 1, max - 1)
+end
+
+-- Stores a preference, only touching the file when the value actually changes
+-- (the toggles are re-applied silently on every connection).
+function ThresholdUI:SetPref(key, value)
+  if self.Prefs[key] == value then return end
+
+  self.Prefs[key] = value
+  self:SavePrefs()
 end
 
 function ThresholdUI:ToggleHealTick(event, arg, silent)
@@ -165,33 +166,31 @@ function ThresholdUI:ToggleHealTick(event, arg, silent)
       echo("Regen tick gauge enabled.\n")
     end
 
-    self.Prefs.HealTick = true
-    self:SavePrefs()
+    self:SetPref("HealTick", true)
 
   elseif arg == "off" then
     self.HealTickBox:hide()
     self.MetersBox:remove(self.HealTickBox)
     self.MetersBox:organize()
-    self.Prefs.HealTick = false
-    self:SavePrefs()
+    self:SetPref("HealTick", false)
 
     if silent ~= true then
       echo("Regen tick gauge disabled.\n")
     end
 
   else
-    echo("Syntax: regen <on|off>\n")
+    echo("Syntax: /tui regen [on|off]\n")
   end
 end
 
 -- Clock
 
--- Background label to prevent bleeding colours
+-- Base label that sizes the clock column within RightBox
 ThresholdUI.DateTimeBg = ThresholdUI.DateTimeBg or Geyser.Label:new({
   name = "DateTimeBg",
-  width = DateTimeBgWidth, height = ThresholdUI.metrics.height,
+  width = ThresholdUI.metrics.dateTimeWidth, height = ThresholdUI.metrics.height,
   h_policy = Geyser.Fixed,
-  stylesheet = ThresholdUI.Styles.DateTimeLabel
+  stylesheet = ThresholdUI.Styles.DateTimeBg
 }, ThresholdUI.RightBox)
 
 ThresholdUI.DateTimeBox = ThresholdUI.DateTimeBox or Geyser.VBox:new({
@@ -226,11 +225,11 @@ ThresholdUI.Devotion = ThresholdUI.Devotion or Geyser.Label:new({
 
 function ThresholdUI:ToggleTimeBox(event, arg, silent)
   if arg == "on" then
-    self.DateTimeBg:resize(DateTimeBgWidth, nil)
+    self.DateTimeBg:resize(self.metrics.dateTimeWidth, nil)
     self.DateTimeBg:show()
     self.RightBox:add(self.DateTimeBg)
-    self.RightBox:resize(self.MetersBox.get_width() + DateTimeBgWidth, nil)
-    self.RightBox:move(-(self.MetersBox.get_width() + DateTimeBgWidth), nil)
+    -- BarBox:organize() positions RightBox, so only its width needs setting
+    self.RightBox:resize(self.metrics.metersWidth + self.metrics.dateTimeWidth, nil)
     self.BarBox:organize()
     self:startTime()
 
@@ -238,32 +237,29 @@ function ThresholdUI:ToggleTimeBox(event, arg, silent)
         echo("Time box enabled.\n")
     end
 
-    self.Prefs.TimeBox = true
-    self:SavePrefs()
+    self:SetPref("TimeBox", true)
 
   elseif arg == "off" then
     self.DateTimeBg:hide()
     self.RightBox:remove(self.DateTimeBg)
     self.RightBox:organize()
-    self.RightBox:resize(self.MetersBox.get_width(), nil)
-    self.RightBox:move(-self.MetersBox.get_width(), nil)
+    self.RightBox:resize(self.metrics.metersWidth, nil)
     self.BarBox:organize()
     self:stopTime()
-    self.Prefs.TimeBox = false
-    self:SavePrefs()
+    self:SetPref("TimeBox", false)
 
     if silent ~= true then
         echo("Time box disabled.\n")
     end
 
   else
-    echo("Syntax: timebox <on|off>\n")
+    echo("Syntax: /tui datetime [on|off]\n")
   end
 end
 
 function ThresholdUI:refreshTime()
   local datetime = ThreshTime:getTime()
-  local datemess = f("{datetime.month}/{datetime.day}/{datetime.year}")
+  local datemess = datetime.month .. "/" .. datetime.day .. "/" .. datetime.year
   local timeAsString = tostring(datetime.hour)
   local timemess
   local suffix
@@ -286,11 +282,23 @@ function ThresholdUI:refreshTime()
     suffix = "rd"
   end
 
-  timemess = f"{timeAsString}{suffix} toll"
-  self.DateLabel:echo(datemess, "nocolor", nil)
-  self.DayLabel:echo(datetime.weekday, "nocolor", nil)
-  self.TimeLabel:echo(timemess, "nocolor", nil)
-  self.Devotion:echo(datetime.devotion, "nocolor", nil)
+  timemess = timeAsString .. suffix .. " toll"
+
+  -- This runs every second, but the toll only changes every few real minutes,
+  -- so only re-echo the labels whose text actually changed.
+  local last = self.LastTimeText or {}
+  local function update(label, key, text)
+    if last[key] == text then return end
+
+    label:echo(text, "nocolor", nil)
+    last[key] = text
+  end
+
+  update(self.DateLabel, "date", datemess)
+  update(self.DayLabel, "day", datetime.weekday)
+  update(self.TimeLabel, "time", timemess)
+  update(self.Devotion, "devotion", datetime.devotion)
+  self.LastTimeText = last
 end
 
 function ThresholdUI:startTime()
@@ -301,4 +309,13 @@ function ThresholdUI:stopTime()
   deleteNamedTimer(self.AppName, self.Timers.Time)
 end
 
-ThresholdUI:startTime()
+-- Apply the saved preferences as the UI is built, so they hold offline too
+if ThresholdUI.Prefs.HealTick == false then
+  ThresholdUI:ToggleHealTick(nil, "off", true)
+end
+
+if ThresholdUI.Prefs.TimeBox == false then
+  ThresholdUI:ToggleTimeBox(nil, "off", true)
+else
+  ThresholdUI:startTime()
+end

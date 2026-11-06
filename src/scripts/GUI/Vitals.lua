@@ -1,7 +1,7 @@
 -- Char.Vitals information
 ThresholdUI.VitalsBox = ThresholdUI.VitalsBox or Geyser.VBox:new({
   name = "VitalsBox",
-  width = 280,
+  width = ThresholdUI.metrics.vitalsWidth,
   h_policy = Geyser.Fixed
 }, ThresholdUI.BarBox)
 
@@ -16,7 +16,6 @@ ThresholdUI.HPBar = ThresholdUI.HPBar or Geyser.Gauge:new({
   name = "HPBar",
   x = 0, y = 0,
   width = "100%", height = "100%",
-  show_text = false
 }, ThresholdUI.HPContainer)
 
 ThresholdUI.HPBar:setStyleSheet(
@@ -74,7 +73,7 @@ ThresholdUI.SPLabel:echo(nil, "nocolor", nil)
 -- EP
 ThresholdUI.EPContainer = ThresholdUI.EPContainer or Geyser.Container:new({
   name = "EPContainer",
-  x = 30, y = 0,
+  x = 0, y = 0,
   width = "100%", height = "100%",
 }, ThresholdUI.VitalsBox);
 
@@ -141,22 +140,65 @@ function ThresholdUI:UpdateVitals()
   end
 end
 
-function ThresholdUI:Afflictions_Add()
-  local aff = gmcp.Char.Afflictions.Add
+-- Afflictions that dim the vitals gauges, and which of them are active now.
+-- Tracked as a set so that losing one (e.g. immobile) while another is still
+-- active (e.g. stun) keeps the gauges dimmed.
+--
+-- Payload shapes, per the mudlib (adm/daemons/modules/gmcp/Char.c,
+-- std/living/handicap.c, std/body/attack.c):
+--   Afflictions.Add    { name, expiration }
+--   Afflictions.Remove name
+--   Afflictions.List   { [name] = expiration, ... }  (the full current set)
+ThresholdUI.DimmingAfflictions = { stun = true, immobile = true }
+ThresholdUI.ActiveDimming = ThresholdUI.ActiveDimming or {}
 
-  if aff[1] == "stun" or aff[1] == "immobile" then
-    self.HPBar:setStyleSheet(self.Styles.HPFrontStunned, self.Styles.HPBack, self.Styles.GaugeText)
-    self.SPBar:setStyleSheet(self.Styles.SPFrontStunned, self.Styles.SPBack, self.Styles.GaugeText)
-    self.EPBar:setStyleSheet(self.Styles.EPFrontStunned, self.Styles.EPBack, self.Styles.GaugeText)
+function ThresholdUI:RefreshVitalsDimming()
+  local front = next(self.ActiveDimming) and "FrontStunned" or "FrontNormal"
+
+  self.HPBar:setStyleSheet(self.Styles["HP" .. front], self.Styles.HPBack, self.Styles.GaugeText)
+  self.SPBar:setStyleSheet(self.Styles["SP" .. front], self.Styles.SPBack, self.Styles.GaugeText)
+  self.EPBar:setStyleSheet(self.Styles["EP" .. front], self.Styles.EPBack, self.Styles.GaugeText)
+end
+
+-- Applies a change to the active set, restyling only if dimmed-ness flipped
+function ThresholdUI:UpdateDimming(change)
+  local wasDimmed = next(self.ActiveDimming) ~= nil
+
+  change()
+
+  if wasDimmed ~= (next(self.ActiveDimming) ~= nil) then
+    self:RefreshVitalsDimming()
   end
 end
 
-function ThresholdUI:Afflictions_Remove()
-  local aff = gmcp.Char.Afflictions.Remove
+function ThresholdUI:Afflictions_Add()
+  local aff = gmcp.Char.Afflictions.Add
+  local name = type(aff) == "table" and aff[1]
+  if not self.DimmingAfflictions[name] then return end
 
-  if aff == "stun" or aff == "immobile" then
-    self.HPBar:setStyleSheet(self.Styles.HPFrontNormal, self.Styles.HPBack, self.Styles.GaugeText)
-    self.SPBar:setStyleSheet(self.Styles.SPFrontNormal, self.Styles.SPBack, self.Styles.GaugeText)
-    self.EPBar:setStyleSheet(self.Styles.EPFrontNormal, self.Styles.EPBack, self.Styles.GaugeText)
-  end
+  self:UpdateDimming(function() self.ActiveDimming[name] = true end)
+end
+
+function ThresholdUI:Afflictions_Remove()
+  local name = gmcp.Char.Afflictions.Remove
+  if not self.DimmingAfflictions[name] then return end
+
+  self:UpdateDimming(function() self.ActiveDimming[name] = nil end)
+end
+
+-- Sent on login and when asked for on connect, so dimming from a stun or
+-- immobile that outlasted a reconnect is restored
+function ThresholdUI:Afflictions_List()
+  local list = gmcp.Char.Afflictions.List
+  if type(list) ~= "table" then return end
+
+  self:UpdateDimming(function()
+    self.ActiveDimming = {}
+
+    for name in pairs(self.DimmingAfflictions) do
+      if list[name] ~= nil then
+        self.ActiveDimming[name] = true
+      end
+    end
+  end)
 end

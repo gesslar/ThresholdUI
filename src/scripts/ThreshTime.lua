@@ -8,11 +8,9 @@ ThreshTime = ThreshTime or {
     yearLength = 2592000, -- The number of UNIX seconds in a game year
     months = { "Dawn", "Cuspis", "Thawing", "Renasci", "Tempest", "Serenus", "Solaria", "Torrid", "Sojourn", "Hoerfest", "Twilight", "Deepchill" },
     days = { "Vidi", "Aubus", "Tikun", "Coronea", "Dashen", "Merida", "Solus", "Ganymor", "Dianis", "Misma", "Duskus", "Lunas" },
-    seasonProgress = { 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0 },
     seasons = { "spring", "summer", "autumn", "winter" },
     monthsInSeasons = { 3, 3, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3 },
-    monthsPerSeason = { 3, 3, 3, 3 },
-    seasonsProgress = { 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0 },
+    seasonProgress = { 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0 },
     devotions = { "Vishnu", "Erosia", "Herastia", "Vivoria", "Tempest", "Silvanus", "Calypso", "Mortis", "Loviatar", "Belphegore", "Bast", "Gethsemane", "Set" },
     voidDevotion = "The Void"
   }
@@ -42,18 +40,12 @@ function ThreshTime:getTime(current)
   local now = current
 
   -- Determine the current IC year
-  results.year = self.config.start.year
-  while current > self.config.yearLength do
-    current = current - self.config.yearLength
-    results.year = results.year + 1
-  end
+  results.year = self.config.start.year + math.floor(current / self.config.yearLength)
+  current = current % self.config.yearLength
 
   -- Determine the current month
-  results.month = self.config.start.month
-  while current > self.config.monthLength do
-    current = current - self.config.monthLength
-    results.month = results.month + 1
-  end
+  results.month = self.config.start.month + math.floor(current / self.config.monthLength)
+  current = current % self.config.monthLength
 
   -- Determine the current month's name
   results.monthName = self.config.months[results.month]
@@ -74,7 +66,7 @@ function ThreshTime:getTime(current)
   results.season = self.config.seasons[seasonIndex + 1]
 
   -- Determine the season stage
-  local thisSeasonProgress = self.config.seasonsProgress[results.month]
+  local thisSeasonProgress = self.config.seasonProgress[results.month]
   local curProgress = results.day + self.config.daysInMonth * thisSeasonProgress
   local totalDaysInSeason = self.config.daysInMonth * 3
   local progress = tonumber(string.format("%.0f", (curProgress / totalDaysInSeason) * 100))
@@ -104,7 +96,7 @@ function ThreshTime:getTime(current)
   -- Determine the Devotion
   local devotionCount = #self.config.devotions
   local devotionDaysDuration = 24
-  local currentDay = ( ( results.month - 1 ) * 30 ) + results.day
+  local currentDay = ( ( results.month - 1 ) * self.config.daysInMonth ) + results.day
   local devotionIndex = math.floor(currentDay / devotionDaysDuration) + 1
 
   if devotionIndex <= devotionCount then
