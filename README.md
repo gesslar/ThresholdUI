@@ -27,14 +27,18 @@ If you're logged in to Threshold:
 1. Download `ThresholdUI.mpackage` from the [latest release](https://github.com/gesslar/ThresholdUI/releases/latest).
 2. In Mudlet, open **Package Manager** and install the downloaded file.
 
-ThresholdUI sets up GMCP with Threshold for you as soon as it's installed.
+ThresholdUI sets up GMCP with Threshold for you as soon as it's installed. It
+also installs [Helper](https://github.com/gesslar/Helper), which formats the
+`/tui` help.
 
 ## Commands
 
 | Command | What it does |
 | --- | --- |
-| `/regen on` / `/regen off` | Show or hide the regen tick meter. |
-| `/datetime on` / `/datetime off` | Show or hide the game clock. |
+| `/tui` | List the commands. |
+| `/tui regen [on\|off]` | Show or hide the regen tick meter; toggles with no argument. |
+| `/tui datetime [on\|off]` | Show or hide the game clock; toggles with no argument. |
+| `/tui size [<6-40>\|default]` | Set the font size (default 13); the whole bar resizes to fit. Shows the current size with no argument. |
 
 Your choices are remembered between sessions and reinstalls.
 

@@ -1,4 +1,3 @@
-ThresholdUI.ConnectionTimer = nil
 ThresholdUI:LoadPrefs()
 
 function ThresholdUI:ConnectionScript()
@@ -7,21 +6,25 @@ function ThresholdUI:ConnectionScript()
   registerNamedTimer(self.AppName, self.Timers.Connection, 1, function()
     deleteNamedTimer(self.AppName, self.Timers.Connection)
     self:modifyModules()
-
-    if ThresholdUI.Prefs.HealTick == false then
-      raiseEvent("ThresholdUI.ToggleHealTick", "off", true)
-    end
-
-    if ThresholdUI.Prefs.TimeBox == false then
-      raiseEvent("ThresholdUI.ToggleTimeBox", "off", true)
-    end
-
-    deleteNamedTimer(self.AppName, self.Timers.Connection)
+    -- Stun and immobile are on the character and outlast a reconnect, so ask
+    -- for the current set rather than trust what we had before
+    sendGMCP("Char.Afflictions.List")
   end)
 end
 
 function ThresholdUI:DisconnectionScript()
   ThresholdUI:DeregisterEventHandlers()
+
+  -- Disconnecting ends a rest in-game, so end the resting bar with it
+  ThresholdUI:CancelInactiveTimer()
+
+  -- Mudlet keeps gmcp across connections, so a psion's feedback would
+  -- otherwise keep the bar up for the next character logged in
+  if gmcp.Char then
+    gmcp.Char.Feedback = nil
+  end
+
+  ThresholdUI:FeedbackToggle()
 end
 
 ThresholdUI.ConnectionHandlers = {
@@ -37,7 +40,7 @@ function ThresholdUI.modifyModules()
 
   -- Disable Modules
   local DisableString =
-      f [[Core.Supports.Remove [ {table.concat(ThresholdUI.disableModules, ", ")} ] ]]
+      "Core.Supports.Remove [ " .. table.concat(ThresholdUI.disableModules, ", ") .. " ]"
 
   sendGMCP(DisableString)
 end

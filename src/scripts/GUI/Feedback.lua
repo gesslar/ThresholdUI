@@ -1,6 +1,5 @@
 local glu = ThresholdUI.glu
 
-ThresholdUI.Feedback = ThresholdUI.Feedback or {}
 ThresholdUI.FeedbackLabels = {"shock", "net", "mastery", "gaze"}
 ThresholdUI.FeedbackBox = ThresholdUI.FeedbackBox or Geyser.HBox:new({
   name = "FeedbackContainer",
@@ -13,7 +12,7 @@ for _, v in ipairs(ThresholdUI.FeedbackLabels) do
   local label = "Feedback_" .. glu.string.capitalize(v)
   ThresholdUI[label] = ThresholdUI[label] or Geyser.Label:new({
     name = label,
-    message = f([[<center>{v}</center>]])
+    message = "<center>" .. v .. "</center>"
   }, ThresholdUI.FeedbackBox)
 
   ThresholdUI[label]:echo(nil, "nocolor", "bc")

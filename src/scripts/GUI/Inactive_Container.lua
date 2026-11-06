@@ -45,9 +45,16 @@ function ThresholdUI:UpdateInactiveGradient()
 end
 
 function ThresholdUI:UpdateInactiveDisplay()
-  local InactiveMess = self.glu.date.shms(os.time() - self.InactiveStart, true)
-  local output = f("You have been {self.InactiveType} for {InactiveMess}")
+  -- Reloading this script resets InactiveStart while the timer keeps running
+  if self.InactiveStart == nil then return end
 
+  local InactiveMess = self.glu.date.shms(os.time() - self.InactiveStart, true)
+  local output = "You have been " .. self.InactiveType .. " for " .. InactiveMess
+
+  -- Ticks ten times a second for a one-second display; skip identical echoes
+  if output == self.InactiveText then return end
+
+  self.InactiveText = output
   self.InactiveLabel:echo(output)
 end
 
@@ -88,6 +95,9 @@ function ThresholdUI:CancelInactiveTimer()
 end
 
 function ThresholdUI:DoInactiveTimer()
+  -- Char.Status updates that don't (yet) carry `inactive` say nothing about it
+  if gmcp.Char.Status.inactive == nil then return end
+
   if gmcp.Char.Status.inactive ~= "0" and self.InactiveStart == nil then
     self:StartInactiveTimer()
     raiseEvent("ThresholdUI.FeedbackToggle")

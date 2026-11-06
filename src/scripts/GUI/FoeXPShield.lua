@@ -113,11 +113,10 @@ ThresholdUI.ShieldLabel:echo(nil, "nocolor", nil)
 ThresholdUI.ShieldContainer:hide()
 
 function ThresholdUI:UpdateXP()
-  if gmcp.Char.Status.tnl == nil then return end
+  local tnl = self:StatusNumber("tnl")
+  if tnl == nil then return end
 
-  self.XPBar:setValue(
-    tonumber(gmcp.Char.Status.tnl), 100, f("{gmcp.Char.Status.tnl}%")
-  )
+  self.XPBar:setValue(tnl, 100, tnl .. "%")
 end
 
 function ThresholdUI:UpdateShielding()
@@ -128,11 +127,11 @@ function ThresholdUI:UpdateShielding()
   local shielding = tonumber(gmcp.Char.Shielding)
   if not shielding or shielding < 0 then
     self.ShieldContainer:hide()
-  else
-    self.ShieldContainer:show()
+    return
   end
 
-  self.ShieldBar:setValue(shielding, 100, f("{shielding}%"))
+  self.ShieldContainer:show()
+  self.ShieldBar:setValue(shielding, 100, shielding .. "%")
 end
 
 function ThresholdUI:UpdateFoe()
@@ -144,7 +143,7 @@ function ThresholdUI:UpdateFoe()
   local name = gmcp.Char.Status.name
   local foe = gmcp.Char.Status.foe_name
   local foefoe = gmcp.Char.Status.foe_foe_name
-  local health = tonumber(gmcp.Char.Status.foe_health)
+  local health = self:StatusNumber("foe_health") or 0
   local foetext = ""
 
   if foe ~= "none" then
