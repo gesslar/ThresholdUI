@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
   "runtime": {
     "version": "Lua 5.1"
   },
@@ -15,10 +16,14 @@
   "workspace": {
     "library": [
       "$HOME/.config/Code/User/globalStorage/delwing.mudlet-scripts-sdk/docs",
+      "$HOME/.config/VSCodium/User/globalStorage/delwing.mudlet-scripts-sdk/docs",
       "node_modules/@gesslar/glu/build/library"
     ],
     "ignoreDir": [
-      "Glu-single.lua"
+      "Glu-single.lua",
+      "src/resources/vendor",
+      "src/resources/test",
+      "delwing.mudlet-scripts-sdk"
     ],
     "useGitIgnore": true
   }
