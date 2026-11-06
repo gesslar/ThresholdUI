@@ -12,6 +12,7 @@ for _, v in ipairs(ThresholdUI.FeedbackLabels) do
   local label = "Feedback_" .. glu.string.capitalize(v)
   ThresholdUI[label] = ThresholdUI[label] or Geyser.Label:new({
     name = label,
+    fontSize = ThresholdUI.metrics.feedbackFontSize,
     message = "<center>" .. v .. "</center>"
   }, ThresholdUI.FeedbackBox)
 

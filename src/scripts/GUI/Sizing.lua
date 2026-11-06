@@ -23,6 +23,10 @@ function ThresholdUI:ApplySizes()
 
   self.InactiveLabel:setFontSize(m.inactiveFontSize)
 
+  for _, v in ipairs(self.FeedbackLabels) do
+    self["Feedback_" .. self.glu.string.capitalize(v)]:setFontSize(m.feedbackFontSize)
+  end
+
   -- Gauges: the number on the bar and the name at its left
   for _, name in ipairs({ "HP", "SP", "EP", "Foe", "XP", "Shield" }) do
     self[name .. "Bar"].text:setFontSize(m.gaugeFontSize)

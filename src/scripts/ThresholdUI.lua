@@ -47,6 +47,7 @@ ThresholdUI.BaseFontSizes = {
   gaugeLabelFontSize = 12,
   gaugeFontSize = 13,
   inactiveFontSize = 11,
+  feedbackFontSize = 8,
   meterFontSize = 8,
   dateFontSize = 11,
   dayFontSize = 11,
