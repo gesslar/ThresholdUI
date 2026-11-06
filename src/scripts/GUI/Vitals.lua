@@ -202,3 +202,7 @@ function ThresholdUI:Afflictions_List()
     end
   end)
 end
+
+-- The gauges were just given their normal styles above, but ActiveDimming
+-- survives a reload of this script, so put any dimming back
+ThresholdUI:RefreshVitalsDimming()
